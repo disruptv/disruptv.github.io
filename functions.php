@@ -1,69 +1,61 @@
-<?php 
+<?php
 /**
- * Aaron Salley Design functions and definitions
+ * Set the content width based on the theme's design and stylesheet.
  *
- * Set up the theme and provides some helper functions, which are used in the
- * theme as custom template tags. Others are attached to action and filter
- * hooks in WordPress to change core functionality.
- *
- * When using a child theme you can override certain functions (those wrapped
- * in a function_exists() call) by defining them first in your child theme's
- * functions.php file. The child theme's functions.php file is included before
- * the parent theme's file, so the child theme functions would be used.
- *
- * @link http://codex.wordpress.org/Theme_Development
- * @link http://codex.wordpress.org/Child_Themes
- *
- * Functions that are not pluggable (not wrapped in function_exists()) are
- * instead attached to a filter or action hook.
- *
- * For more information on hooks, actions, and filters,
- * @link http://codex.wordpress.org/Plugin_API
- *
- * @package WordPress
- * @subpackage Aaron_Salley_Design
- * @since Aaron Salley Design 2014 1.0
- */
-
-/**
- * Set up the content width value based on the theme's design.
- *
- * @see design_content_width()
- *
- * @since Aaron Salley Design 2014 1.0
  */
 if ( ! isset( $content_width ) ) {
-	$content_width = 880;
+	$content_width = 660;
 }
 
 if ( ! function_exists( 'design_setup' ) ) :
 /**
- * Aaron Salley Design setup.
- *
- * Set up theme defaults and registers support for various WordPress features.
+ * Sets up theme defaults and registers support for various WordPress features.
  *
  * Note that this function is hooked into the after_setup_theme hook, which
  * runs before the init hook. The init hook is too late for some features, such
- * as indicating support post thumbnails.
+ * as indicating support for post thumbnails.
  *
- * @since Aaron Salley Design 2014 1.0
  */
 function design_setup() {
 
-	// This theme styles the visual editor to resemble the theme style.
-	add_editor_style( array( 'css/editor-style.css', design_font_url() ) );
+	/*
+	 * Make theme available for translation.
+	 * Translations can be filed in the /languages/ directory.
+	 * If you're building a theme based on Design, use a find and replace
+	 * to change 'Design' to the name of your theme in all the template files
+	 */
+	load_theme_textdomain( 'design', get_template_directory() . '/languages' );
 
-	// Add RSS feed links to <head> for posts and comments.
+	// Add default posts and comments RSS feed links to head.
 	add_theme_support( 'automatic-feed-links' );
 
-	// Enable support for Post Thumbnails, and declare two sizes.
-	add_theme_support( 'post-thumbnails' );
-	set_post_thumbnail_size( 672, 372, true );
-	add_image_size( 'twentyfourteen-full-width', 1038, 576, true );
+	/*
+	 * Let WordPress manage the document title.
+	 * By adding theme support, we declare that this theme does not use a
+	 * hard-coded <title> tag in the document head, and expect WordPress to
+	 * provide it for us.
+	 */
+	add_theme_support( 'title-tag' );
 
+	/*
+	 * Enable support for Post Thumbnails on posts and pages.
+	 */
+	add_theme_support( 'post-thumbnails' );
+	set_post_thumbnail_size( 1492, 1065, true );
+
+	/*
+	 * Enable support for custom backgrounds.
+	 */
+	$defaults = array(
+		'wp-head-callback' => null,
+		'default-image' => get_template_directory_uri() . '/img/background.png',
+	);
+	add_theme_support( 'custom-background', $defaults );
+	
 	// This theme uses wp_nav_menu() in two locations.
 	register_nav_menus( array(
-		'primary'   => __( 'Top primary menu', 'design' ),
+		'primary' => __( 'Primary Menu',      'design' ),
+		'social'  => __( 'Social Links Menu', 'design' ),
 	) );
 
 	/*
@@ -71,421 +63,228 @@ function design_setup() {
 	 * to output valid HTML5.
 	 */
 	add_theme_support( 'html5', array(
-		'search-form', 'comment-form', 'comment-list',
+		'search-form', 'comment-form', 'comment-list', 'gallery', 'caption'
 	) );
 
 	/*
-	 * Enable support for Post Formats.
-	 * See http://codex.wordpress.org/Post_Formats
+	 * This theme styles the visual editor to resemble the theme style,
+	 * specifically font, colors, icons, and column width.
 	 */
-	add_theme_support( 'post-formats', array(
-		'aside', 'image', 'video', 'audio', 'quote', 'link', 'gallery',
+	add_editor_style( array( 'css/editor-style.css', 'genericons/genericons.css', design_fonts_url() ) );
+	
+	// Create Team post type
+	new custom_post_type( 'work', 'work', null, array(
+		'menu_icon'	=> 'dashicons-star-filled',
+        'supports' => array( 'title', 'editor', 'thumbnail', 'revisions', 'page-attributes', 'custom-fields' ),
 	) );
-
-	// This theme allows users to set a custom background.
-	add_theme_support( 'custom-background', apply_filters( 'design_custom_background_args', array(
-		'default-color' => 'EAEEEF',
-	) ) );
-
-	// Add support for featured content.
-	add_theme_support( 'featured-content', array(
-		'featured_content_filter' => 'design_get_featured_posts',
-		'max_posts' => 6,
+	new custom_taxonomy( 'work_platform', 'work', 'platforms', 'platform', array(
+		'hierarchical' => true,
+        'show_admin_column'  => true,
 	) );
-
-	// This theme uses its own gallery styles.
-	add_filter( 'use_default_gallery_style', '__return_false' );
+	new custom_taxonomy( 'work_role', 'work', 'roles', 'role', array(
+        'show_admin_column'  => true,
+	) );
+	
+	/*
+	 * Register new posts statuses for 'Work' post type (future support).
+	 */
+	register_post_status( 'Concept' );
+	register_post_status( 'In Progress' );
+	register_post_status( 'Completed' );
 }
 endif; // design_setup
 add_action( 'after_setup_theme', 'design_setup' );
 
+if ( ! function_exists( 'design_fonts_url' ) ) :
 /**
- * Adjust content_width value for image attachment template.
+ * Register Google fonts for Theme.
  *
- * @since Aaron Salley Design 2014 1.0
  *
- * @return void
+ * @return string Google fonts URL for the theme.
  */
-function design_content_width() {
-	if ( is_attachment() && wp_attachment_is_image() ) {
-		$GLOBALS['content_width'] = 880;
-	}
-}
-add_action( 'template_redirect', 'design_content_width' );
+function design_fonts_url() {
+	$fonts_url = '';
+	$fonts     = array();
+	$subsets   = 'latin,latin-ext';
 
-/**
- * Walker menu for single page display with anchor links.
- *
- * @since Aaron Salley Design 2014 1.0
- *
- * @return void
- */
-
-class anchors extends Walker_Nav_Menu{
-	  function start_el( &$output, $item, $depth, $args ){
-		   global $wp_query;
-		   $indent = ( $depth ) ? str_repeat( "	", $depth ) : '';
-		   $class_names = $value = '';
-		   $classes = empty( $item->classes ) ? array() : (array) $item->classes;
-		   $class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item ) );
-		   $class_names = ' class="'. esc_attr( $class_names ) . '"';
-		   $output .= $indent . '<li id="menu-item-'. $item->ID . '"' . $value . $class_names .'>';
-		   $attributes  = ! empty( $item->attr_title ) ? ' title="'  . esc_attr( $item->attr_title ) .'"' : '';
-		   $attributes .= ! empty( $item->target )     ? ' target="' . esc_attr( $item->target     ) .'"' : '';
-		   $attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
-				$varpost = get_post( $item->object_id );
-				if( is_home() ){
-				  $attributes .= ' href="#post-' . $varpost->ID . '"';
-				} elseif ( $varpost->post_name == 'contact' ) {
-				  $attributes .= ' href="'.home_url().'/#site-footer"';
-				} else {
-				  $attributes .= ' href="'.home_url().'/#' . $varpost->post_name . '"';
-				}
-			$item_output = $args->before;
-			$item_output .= '<a'. $attributes .'>';
-			$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID );
-			$item_output .= $args->link_after;
-			$item_output .= '</a>';
-			$item_output .= $args->after;
-			$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
-	 }
-}
-
-/** 
- * Creates a tree of child pages for a given ID
- *
- * @since Aaron Salley Design 2014 1.0
- */
-function is_tree( $pid ) {      // $pid = The ID of the page we're looking for pages underneath
-	global $post;         // load details about this page
-	if( is_page() && ( $post->post_parent == $pid||is_page( $pid ) ) ) 
-			   return true;   // we're at the page or at a sub page
-	else 
-			   return false;  // we're elsewhere
-};
-
-/**
- * Getter function for Featured Content Plugin.
- *
- * @since Aaron Salley Design 2014 1.0
- *
- * @return array An array of WP_Post objects.
- */
-function design_get_featured_posts() {
-	/**
-	 * Filter the featured posts to return in Aaron Salley Design.
-	 *
-	 * @since Aaron Salley Design 2014 1.0
-	 *
-	 * @param array|bool $posts Array of featured posts, otherwise false.
-	 */
-	return apply_filters( 'design_get_featured_posts', array() );
-}
-
-/**
- * A helper conditional function that returns a boolean value.
- *
- * @since Aaron Salley Design 2014 1.0
- *
- * @return bool Whether there are featured posts.
- */
-function design_has_featured_posts() {
-	return ! is_paged() && (bool) design_get_featured_posts();
-}
-
-/**
- * Register Aaron Salley Design widget areas.
- *
- * @since Aaron Salley Design 2014 1.0
- *
- * @return void
- */
-function design_widgets_init() {
-	require get_template_directory() . '/inc/widgets.php';
-	register_widget( 'Aaron_Salley_Design_Ephemera_Widget' );
-
-	register_sidebar( array(
-		'name'          => __( 'Footer Widget Area', 'design' ),
-		'id'            => 'sidebar-1',
-		'description'   => __( 'Appears in the footer section of the site.', 'design' ),
-		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</aside>',
-		'before_title'  => '<h1 class="widget-title">',
-		'after_title'   => '</h1>',
-	) );
-}
-add_action( 'widgets_init', 'design_widgets_init' );
-
-/**
- * Register Lato Google font for Aaron Salley Design.
- *
- * @since Aaron Salley Design 2014 1.0
- *
- * @return string
- */
-function design_font_url() {
-	$font_url = '';
 	/*
 	 * Translators: If there are characters in your language that are not supported
-	 * by Lato, translate this to 'off'. Do not translate into your own language.
+	 * by Noto Sans, translate this to 'off'. Do not translate into your own language.
 	 */
 	if ( 'off' !== _x( 'on', 'Lato font: on or off', 'design' ) ) {
-		$font_url = add_query_arg( 'family', urlencode( 'Lato:100,300,400,700,900,100italic,300italic,700italic' ), "//fonts.googleapis.com/css" );
+		$fonts[] = 'Lato:300italic,100italic,300,100';
 	}
 
-	return $font_url;
+	/*
+	 * Translators: To add an additional character subset specific to your language,
+	 * translate this to 'greek', 'cyrillic', 'devanagari' or 'vietnamese'. Do not translate into your own language.
+	 */
+	$subset = _x( 'no-subset', 'Add new subset (greek, cyrillic, devanagari, vietnamese)', 'design' );
+
+	if ( 'cyrillic' == $subset ) {
+		$subsets .= ',cyrillic,cyrillic-ext';
+	} elseif ( 'greek' == $subset ) {
+		$subsets .= ',greek,greek-ext';
+	} elseif ( 'devanagari' == $subset ) {
+		$subsets .= ',devanagari';
+	} elseif ( 'vietnamese' == $subset ) {
+		$subsets .= ',vietnamese';
+	}
+
+	if ( $fonts ) {
+		$fonts_url = add_query_arg( array(
+			'family' => urlencode( implode( '|', $fonts ) ),
+			'subset' => urlencode( $subsets ),
+		), '//fonts.googleapis.com/css' );
+	}
+
+	return $fonts_url;
 }
+endif;
 
 /**
- * Enqueue scripts and styles for the front end.
+ * JavaScript Detection.
  *
- * @since Aaron Salley Design 2014 1.0
+ * Adds a `js` class to the root `<html>` element when JavaScript is detected.
  *
- * @return void
+ * @since Theme 1.1
+ */
+function design_javascript_detection() {
+	echo "<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>\n";
+}
+add_action( 'wp_head', 'design_javascript_detection', 0 );
+
+/**
+ * Enqueue scripts and styles.
+ *
  */
 function design_scripts() {
-	// Load our reset stylesheet.
-	wp_enqueue_style( 'reset-style', get_template_directory_uri(). '/css/reset.css', array() );
+	// Add custom fonts, used in the main stylesheet.
+	wp_enqueue_style( 'design-fonts', design_fonts_url() );
 
-	// Add Lato font, used in the main stylesheet.
-	wp_register_style( 'Lato-font', design_font_url() );
-	wp_enqueue_style( 'Lato-font' );
+	// Add Genericons, used in the main stylesheet.
+	wp_enqueue_style( 'genericons', get_template_directory_uri() . '/css/fonts/genericons/genericons.css' );
+
+	// Add Socialico, used in the main stylesheet.
+	wp_enqueue_style( 'socialico', get_template_directory_uri() . '/css/fonts/socialico/stylesheet.css' );
 
 	// Load our main stylesheet.
-	wp_enqueue_style( 'design-style', get_stylesheet_uri(), '', '', 'screen' );
-	wp_enqueue_style( 'iOS-style', get_template_directory_uri() . '/css/iOS.css', '', '', 'handheld' );
-	
-	// Load the Internet Explorer specific stylesheet.
-	wp_enqueue_style( 'design-ie', get_template_directory_uri() . '/css/ie.css', array( 'design-style', 'genericons' ), '20131205' );
+	wp_enqueue_style( 'design-style', get_stylesheet_uri() );
+
+	// Load the Internet Explorer specific stylesheet & scripts.
+	wp_enqueue_style( 'design-ie', get_template_directory_uri() . '/css/ie.css', array( 'design-style' ) );
 	wp_style_add_data( 'design-ie', 'conditional', 'lt IE 9' );
+	
+	wp_enqueue_script( 'modernizr', get_template_directory_uri() . '/bower_components/modernizr/modernizr.js');
+	wp_script_add_data( 'modernizr', 'conditional', 'lt IE 9' );
+	
+	wp_enqueue_script( 'respond-js', '//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js');
+	wp_script_add_data( 'respond-js', 'conditional', 'lt IE 9' );
+
+	// Load the Internet Explorer 7 specific stylesheet.
+	wp_enqueue_style( 'design-ie7', get_template_directory_uri() . '/css/ie7.css', array( 'design-style' ) );
+	wp_style_add_data( 'design-ie7', 'conditional', 'lt IE 8' );
+
+	wp_enqueue_style( 'slick', get_template_directory_uri() . '/bower_components/slick.js/slick/slick.css' );
+	wp_enqueue_script( 'slick', get_template_directory_uri() . '/bower_components/slick.js/slick/slick.min.js', array(), null, true );
+
+	wp_enqueue_script( 'scrollTo', get_template_directory_uri() . '/bower_components/jquery.scrollTo/jquery.scrollTo.min.js', array(), null, true );
+
+	wp_enqueue_script( 'parallax', get_template_directory_uri() . '/bower_components/parallax.js/parallax.min.js', array(), null, true );
+
+	wp_enqueue_script( 'foundation', get_template_directory_uri() . '/bower_components/foundation/js/foundation.min.js', array(), null, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
 
-	if ( is_front_page() && 'slider' == get_theme_mod( 'featured_content_layout' ) ) {
-		wp_enqueue_script( 'design-slider', get_template_directory_uri() . '/js/slider.js', array( 'jquery' ), '20131205', true );
-		wp_localize_script( 'design-slider', 'featuredSliderDefaults', array(
-			'prevText' => __( 'Previous', 'design' ),
-			'nextText' => __( 'Next', 'design' )
-		) );
-	}
-
-	wp_enqueue_script( 'jquery-masonry' );
-	wp_enqueue_script( 'affix-script', get_template_directory_uri() . '/js/affix.min.js', array( 'jquery' ) );
-	wp_enqueue_script( 'localscroll-script', get_template_directory_uri() . '/js/localScroll.min.js', array( 'jquery' ) );
-	wp_enqueue_script( 'scrollTo-script', get_template_directory_uri() . '/js/scrollTo.min.js', array( 'jquery' ) );
-	wp_enqueue_script( 'init-script', get_template_directory_uri() . '/js/init.js', array( 'jquery' ), '', true );
-
+	wp_enqueue_script( 'design-script', get_template_directory_uri() . '/js/functions.js', array( 'jquery' ), null, true );
 }
 add_action( 'wp_enqueue_scripts', 'design_scripts' );
 
-if ( ! function_exists( 'design_the_attached_image' ) ) :
 /**
- * Print the attached image with a link to the next attached image.
+ * New post type class.
  *
- * @since Aaron Salley Design 2014 1.0
- *
- * @return void
  */
-function design_the_attached_image() {
-	$post                = get_post();
-	/**
-	 * Filter the default Aaron Salley Design attachment size.
-	 *
-	 * @since Aaron Salley Design 2014 1.0
-	 *
-	 * @param array $dimensions {
-	 *     An array of height and width dimensions.
-	 *
-	 *     @type int $height Height of the image in pixels. Default 810.
-	 *     @type int $width  Width of the image in pixels. Default 810.
-	 * }
-	 */
-	$attachment_size     = apply_filters( 'design_attachment_size', array( 810, 810 ) );
-	$next_attachment_url = wp_get_attachment_url();
-
-	/*
-	 * Grab the IDs of all the image attachments in a gallery so we can get the URL
-	 * of the next adjacent image in a gallery, or the first image (if we're
-	 * looking at the last image in a gallery), or, in a gallery of one, just the
-	 * link to that image file.
-	 */
-	$attachment_ids = get_posts( array(
-		'post_parent'    => $post->post_parent,
-		'fields'         => 'ids',
-		'numberposts'    => -1,
-		'post_status'    => 'inherit',
-		'post_type'      => 'attachment',
-		'post_mime_type' => 'image',
-		'order'          => 'ASC',
-		'orderby'        => 'menu_order ID',
-	) );
-
-	// If there is more than 1 attachment in a gallery...
-	if ( count( $attachment_ids ) > 1 ) {
-		foreach ( $attachment_ids as $attachment_id ) {
-			if ( $attachment_id == $post->ID ) {
-				$next_id = current( $attachment_ids );
-				break;
-			}
-		}
-
-		// get the URL of the next image attachment...
-		if ( $next_id ) {
-			$next_attachment_url = get_attachment_link( $next_id );
-		}
-
-		// or get the URL of the first image attachment.
-		else {
-			$next_attachment_url = get_attachment_link( array_shift( $attachment_ids ) );
-		}
-	}
-
-	printf( '<a href="%1$s" rel="attachment">%2$s</a>',
-		esc_url( $next_attachment_url ),
-		wp_get_attachment_image( $post->ID, $attachment_size )
-	);
-}
-endif;
+require_once 'inc/custom-post-types.php';
 
 /**
- * Extend the default WordPress body classes.
+ * Implement the Magellan menu.
  *
- * Adds body classes to denote:
- * 1. Presence of header image.
- * 2. Index views.
- * 3. Presence of footer widgets.
- * 4. Single views.
- * 5. Featured content layout.
- *
- * @since Aaron Salley Design 2014 1.0
- *
- * @param array $classes A list of existing body class values.
- * @return array The filtered body class list.
  */
-function design_body_classes( $classes ) {
-	if ( get_header_image() ) {
-		$classes[] = 'header-image';
-	} else {
-		$classes[] = 'masthead-fixed';
-	}
-
-	if ( is_archive() || is_search() || is_home() ) {
-		$classes[] = 'list-view';
-	}
-
-	if ( is_active_sidebar( 'sidebar-2' ) ) {
-		$classes[] = 'footer-widgets';
-	}
-
-	if ( is_singular() && ! is_front_page() ) {
-		$classes[] = 'singular';
-	}
-
-	if ( is_front_page() && 'slider' == get_theme_mod( 'featured_content_layout' ) ) {
-		$classes[] = 'slider';
-	} elseif ( is_front_page() ) {
-		$classes[] = 'grid';
-	}
-
-	return $classes;
-}
-add_filter( 'body_class', 'design_body_classes' );
-
-/**
- * Extend the default WordPress post classes.
- *
- * Adds a post class to denote:
- * Non-password protected page with a post thumbnail.
- *
- * @since Aaron Salley Design 2014 1.0
- *
- * @param array $classes A list of existing post class values.
- * @return array The filtered post class list.
- */
-function design_post_classes( $classes ) {
-	if ( ! post_password_required() && has_post_thumbnail() ) {
-		$classes[] = 'has-post-thumbnail';
-	}
-
-	return $classes;
-}
-add_filter( 'post_class', 'design_post_classes' );
-
-/**
- * Create a nicely formatted and more specific title element text for output
- * in head of document, based on current view.
- *
- * @since Aaron Salley Design 2014 1.0
- *
- * @param string $title Default title text for current view.
- * @param string $sep Optional separator.
- * @return string The filtered title.
- */
-function design_wp_title( $title, $sep ) {
-	global $paged, $page;
-
-	if ( is_feed() ) {
-		return $title;
-	}
-
-	// Add the site name.
-	$title .= get_bloginfo( 'name' );
-
-	// Add a page number if necessary.
-	if ( $paged >= 2 || $page >= 2 ) {
-		$title = "$title $sep " . sprintf( __( 'Page %s', 'design' ), max( $paged, $page ) );
-	}
-
-	return $title;
-}
-add_filter( 'wp_title', 'design_wp_title', 10, 2 );
-
-// Custom template tags for this theme.
-require get_template_directory() . '/inc/template-tags.php';
-
-// Add Theme Customizer functionality.
-require get_template_directory() . '/inc/customizer.php';
+require get_template_directory() . '/inc/magellan_nav_menu.php';
 
 /*
- * Add Featured Content functionality.
+ * AJAX functions for portfolio items and contact.
  *
- * To overwrite in a plugin, define your own Featured_Content class on or
- * before the 'setup_theme' hook.
+ * @since
  */
-if ( ! class_exists( 'Featured_Content' ) && 'plugins.php' !== $GLOBALS['pagenow'] ) {
-	require get_template_directory() . '/inc/featured-content.php';
+function ajax_enqueue($hook) {
+	// in JavaScript, object properties are accessed as ajax_object.ajax_url, ajax_object.we_value
+	wp_localize_script( 'design-script', 'ajax_object',
+            array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 }
+add_action( 'wp_enqueue_scripts', 'ajax_enqueue' );
 
-
-
-function get_custom_cat_template($single_template) {
-     global $post;
-
-       if ( in_category( 'newsletters' )) {
-          $single_template = get_template_directory() . '/single-newsletters.php';
-     }
-     return $single_template;
+function project_callback() {
+    
+	get_template_part( 'content/content', 'project' );
+			
+	die();
 }
+add_action( 'wp_ajax_project', 'project_callback' );
+add_action( 'wp_ajax_nopriv_project', 'project_callback' );
 
-add_filter( "single_template", "get_custom_cat_template" ) ;
-
-function my_login_logo() { ?>
+/*
+ * Design login page changes.
+ *
+ */
+function design_login_logo() { ?>
     <style type="text/css">
         body.login div#login h1 a {
-            background-image: url(<?php echo get_stylesheet_directory_uri(); ?>/img/logo.png);
-            padding-bottom: 30px;
+	        width: 100%;
+            background-image: url(<?php echo get_template_directory_uri(); ?>/img/design_monogram.png);
+            background-size: contain;
         }
     </style>
 <?php }
-add_action( 'login_enqueue_scripts', 'my_login_logo' );
-function my_login_logo_url() {
+add_action( 'login_enqueue_scripts', 'design_login_logo' );
+
+function design_login_logo_url() {
     return get_bloginfo( 'url' );
 }
-add_filter( 'login_headerurl', 'my_login_logo_url' );
+add_filter( 'login_headerurl', 'design_login_logo_url' );
 
-function my_login_logo_url_title() {
+function design_login_logo_url_title() {
     return get_bloginfo('name');
 }
-add_filter( 'login_headertitle', 'my_login_logo_url_title' );
+add_filter( 'login_headertitle', 'design_login_logo_url_title' );
+
+/**
+ * Returns the first image of a gallery in a content block.
+ *
+ * @since 4.1
+ */
+function get_gallery( $size = 'full' ) {
+	global $post;
+	$content = get_the_content();
+	
+	if ( has_shortcode( $content, 'gallery' ) ) {
+		// Get the gallery from the appropriate content meta box
+		preg_match_all('/'.get_shortcode_regex().'/s', $content, $matches);
+	
+		// Split the image ids into an array and abstract the first value
+		preg_match_all('#ids=([\'"])(.+?)\1#is', $matches[0][0], $gallery);
+		
+		$gallery = explode( ',', $gallery[2][0]);
+		
+		foreach( $gallery as $image_id ){
+			// Get image source and echo it
+			$image[] = wp_get_attachment_image( $image_id, $size, false, array() );
+		}
+		
+		$output = implode(' ', $image);
+	}
+	
+	return $output;
+}
