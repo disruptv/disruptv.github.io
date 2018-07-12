@@ -1,0 +1,548 @@
+/*
+Theme Name: Aaron Salley Design
+Author: Aaron Salley Design
+Author URI: http://aaronsalleydesign.com/
+Description: 
+Version: 1.0.2
+License: Creative Commons Attribution-NoDerivs 3.0 United States License
+License URI: http://creativecommons.org/licenses/by-nd/3.0/us/
+Text Domain: design
+
+Copyright © 2013 Aaron Salley Design.  All Rights Reserved.  Licensed for exclusive use by .
+
+This work is licensed under the Creative Commons Attribution-NoDerivs 3.0 United States License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nd/3.0/us/ or send a letter to Creative Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA. 
+
+***********************************************
+***********************************************
+***********************************************
+********************************   ************
+******************************* *  ************
+*****************************  **  ************
+***************************   ***  ************
+*************************   *****  ************
+*********************       *****  ************
+******************  **  ******  *  ************
+****************  **  *********    ************
+***************  *  *************  ************
+***************   ***************  ************
+***************  ****************  ************
+*************    ****************  ************
+***********  ***  **************   ************
+*********  *******  **********  *  ************
+*******  ***********         ****  ************
+***********************************************
+***********************************************
+***********************************************
+***********************************************
+***********************************************
+
+*/
+
+/**
+ * Table of Contents:
+ *
+ * 1.0 - Element Styling
+ * 2.0 - Repeatable Patterns
+ * 3.0 - Basic Structure
+ * 4.0 - Header
+ *   4.1 - Site Header
+ *   4.2 - Navigation
+ * 5.0 - Content
+ *   5.1 - Entry Header
+ *   5.2 - Entry Meta
+ *   5.3 - Entry Content
+ *   5.4 - Galleries
+ *   5.5 - Post Formats
+ *   5.6 - Attachments
+ *   5.7 - Post/Paging Navigation
+ *   5.8 - Author Bio
+ *   5.9 - Archives
+ *   5.10 - Search Results/No posts
+ *   5.11 - 404
+ *   5.12 - Comments
+ *   5.13 - Multisite
+ * 6.0 - Sidebar
+ *   6.1 - Widgets
+ * 7.0 - Footer
+ * 8.0 - Media Queries
+ * 9.0 - Print
+ * ----------------------------------------------------------------------------
+ */
+  
+  
+/**
+ * Repeatable Patterns
+ * ----------------------------------------------------------------------------
+ */
+ 
+
+ /**
+ * Basic Structure
+ * ----------------------------------------------------------------------------
+ */
+html,
+title,
+body,
+p,
+br,
+hr {
+	color: #2C3E50;
+	font: 300 14px "Lato";
+}
+
+table {
+	margin: 0 auto;
+}
+
+h1 {
+	color: #2C3E50;
+	font: 300 36px "Lato";
+}
+
+h2 {
+	color: #2C3E50;
+	font: 300 24px "Lato";
+}
+
+h3 {
+	color: #2C3E50;
+	font: 300 18px "Lato";
+}
+
+a,
+link
+nav {
+	color: inherit;
+	text-decoration: none;
+}
+
+a:hover,
+a:hover > .entry-title {
+	color: #D15400;
+	-webkit-transition-property: color; 
+	-webkit-transition-duration: 1s; 
+	-webkit-transition-timing-function: linear;
+}
+
+body.custom-background {
+	background-size: cover;
+}
+
+li.brick {
+	display: inline-block;
+	overflow: hidden;
+	text-align: center;
+	width: 22.5%;
+}
+
+
+/**
+ * Header
+ * ----------------------------------------------------------------------------
+ */
+
+#leader {
+	position: absolute;
+	top: 0;
+	width: 100%;
+}
+
+#leader h1 {
+	font: 300 36px "Lato";
+}
+
+#leader a {
+	color: #D15400;
+	font: 300 21px "Lato";
+}
+
+#leader a:hover {
+	color: #169E83;
+}
+
+.page-title {
+	text-transform: lowercase;
+}
+
+/**
+ * Site Header
+ * ----------------------------------------------------------------------------
+ */
+ 
+.site-header {
+	background: white;
+}
+
+.site-title {
+	display: none;
+}
+
+.home .site-title {
+	display: block;
+	font: 300 48px "Lato";
+	padding-top: 25px;
+	text-align: center;
+}
+
+/**
+ * Navigation
+ * ----------------------------------------------------------------------------
+ */
+
+.site-navigation {
+	font: 300 21px "Lato";
+	text-align: center;
+}
+
+ul.nav-menu {
+	background: white;
+	margin: 0;
+	padding: 0;
+}
+
+.nav-menu li {
+	display: inline-block;
+	padding: 10px;
+}
+
+.nav-menu.affix {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 100000;
+}
+
+
+/**
+ * Content
+ * ----------------------------------------------------------------------------
+ */
+
+.site-content {
+	background: white;
+	padding: 20px 0;
+	position: relative;
+}
+
+.content-area {
+	margin: 0 auto;
+	max-width: 880px;
+	width: 100%;
+}
+
+.content-wrapper {
+	clear: both;
+	height: 100%;
+	position: relative;
+	width: 100%;
+}
+
+.child {
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+	width: 33%;
+}
+
+/**
+ * Entry Header
+ * ----------------------------------------------------------------------------
+ */
+
+.entry-header {
+	text-align: center;
+}
+
+.home .entry-title {
+	display: none;
+}
+
+.home .child .entry-header {
+	display: inline-block;
+	max-width: 262px;
+}
+
+.home .child .entry-title {
+	display: inline-block;
+	font: 300 24px "Lato";
+	text-transform: lowercase;
+}
+
+.home .child .entry-thumbnail {
+	overflow: hidden;
+}
+
+.home .child .entry-thumbnail img {
+	height: 262px;
+	width: auto;
+}
+
+/*
+.home #work li .entry-header,
+.home #work li .entry-thumbnail {
+	display: inline-block;
+	height: 160px;
+	overflow: hidden;
+	width: 202px;
+}
+
+.home #work li .entry-thumbnail img {
+	height: 262px;
+	width: auto;
+}
+*/
+
+.home #work h3.entry-title {
+	display: inline-block;
+}
+
+/**
+ * Entry Meta
+ * ----------------------------------------------------------------------------
+ */
+
+.entry-meta {
+	float: right;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 267px;
+}
+
+.entry-meta > ul {
+	padding: 0;
+}
+
+.entry-meta h1 {
+	font: 400 18px "Lato";
+}
+
+.entry-meta .services li {
+	display: block;
+	font: 300 14px "Lato";
+}
+
+.entry-meta .button {
+	background: #E54C3C;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	color: #EAEEEF;
+	display: block;
+	font: 300 18px "Lato";
+	height: 22px;
+	margin: 75px 0;
+	padding: 11px 0;
+	position: relative;
+	text-align: center;
+	vertical-align: middle;
+	width: 140px;
+}
+
+.entry-meta .button:hover {
+	background: #169E83;
+	-webkit-transition-property: color; 
+	-webkit-transition-duration: 1s; 
+	-webkit-transition-timing-function: linear;
+	transition: linear;
+}
+
+/**
+ * Entry Content
+ * ----------------------------------------------------------------------------
+ */
+ 
+.post-thumbnail {
+	display: block;
+	max-height: 372px;
+	max-width: 880px;
+	overflow: hidden;
+	text-align: center;
+}
+
+.post-thumbnail img {
+	height: auto;
+	max-width: 100%;
+	width: auto;
+}
+ 
+.home .child .entry-content {
+	display: inline-block;
+	max-width: 262px;
+	text-align: justify;
+}
+
+.single .entry-content {
+	width: 416px;
+}
+
+.single .entry-content img {
+	height: auto;
+	max-width: 100%;
+}
+
+/**
+ * Footer
+ * ----------------------------------------------------------------------------
+ */
+
+.site-footer {
+	background: #2C3E50;
+	color: #EAEEEF;
+	margin: 0;
+	padding: 50px 0;
+	font: 300 24px "Lato";
+	position: relative;
+}
+
+.footer-sidebar {
+	margin: 0 auto;
+	max-width: 880px;
+	width: 100%;
+}
+
+.footer-sidebar .widget {
+	display: inline-block;
+}
+
+.footer-sidebar address {
+	font-style: normal;
+}
+
+.footer-sidebar .widget_nav_menu {
+	float: right;
+	position: relative;
+	top: 1.75em;
+}
+
+.footer-sidebar .menu {
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+
+.footer-sidebar .menu li {
+	display: inline-block;
+	padding-left: 1em;
+}
+
+.footer-sidebar .menu li a {
+	background: url(img/social_links_spry.png) no-repeat;
+	display: block;
+	height: 36px;
+	overflow: hidden;
+	text-indent: 100%;
+	width: 36px;
+}
+
+.footer-sidebar .menu li a:hover {
+	background: url(img/social_links_hover_spry.png) no-repeat;
+	-webkit-transition-property: background; 
+	-webkit-transition-duration: .5s; 
+	-webkit-transition-timing-function: linear;
+}
+
+.menu li.facebook a,
+.menu li.facebook a:hover {
+	background-position: 0px 0px;
+}
+
+.menu li.twitter a,
+.menu li.twitter a:hover {
+	background-position: -56px 0px;
+}
+
+.menu li.behance a,
+.menu li.behance a:hover {
+	background-position: -113px 0px;
+}
+
+.menu li.pinterest a,
+.menu li.pinterest a:hover {
+	background-position: -170px 0px;
+}
+
+.menu li.tumblr a,
+.menu li.tumblr a:hover {
+	background-position: -227px 0px;
+}
+
+.site-footer .top-link {
+	display: block;
+	font: 100 144px "Lato";
+	margin: 0 auto;
+	max-height: 0px;
+	max-width: 880px;
+	position: relative;
+	text-align: right;
+	top:-50px;
+	width: 100%;
+}
+
+
+/**
+ * Media Queries
+ * ----------------------------------------------------------------------------
+ */
+
+@media only screen and (max-width: 480px) {
+	.entry-thumbnail {
+		max-width: 480px;
+		overflow: hidden;
+	}
+	.child {
+		display: block;
+		margin: 20px auto;
+		width: 100%;
+	}
+	#work h2 {
+		text-align: center !important;
+	}
+	#work ul.masonry {
+		margin: 0;
+		padding: 0;
+	}
+	#work li.brick {
+		overflow: visible;
+		text-align: center;
+		width: 100%;
+	}
+	.content-area {
+		max-width: 480px;
+	}
+	.single .entry-content {
+		width: 100%;
+	}
+	.single .entry-meta {
+		float: none;
+		position: relative;
+		width: 100%;
+	}
+	.site-footer .top-link {
+		top: -100px;
+	}
+	.footer-sidebar .widget_nav_menu {
+		clear: both;
+		display: block;
+		float: none;
+		text-align: center;
+	}
+	.footer-sidebar .menu li:first-child {
+		padding-left: 0;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.child {
+		display: block;
+		margin: 20px auto;
+		width: 262px;
+	}
+	.single .entry-content {
+		padding-left: 30px;
+		width: 436px;
+	}
+	.single .entry-meta {
+		width: 247px;
+	}
+}
