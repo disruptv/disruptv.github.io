@@ -31,14 +31,14 @@ src="https://www.facebook.com/tr?id=278365669188300&ev=PageView&noscript=1"
 <div class="off-canvas-wrapper">
 	<div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
 		<header class="site-header">
-			<a href="<?php echo site_url(); ?>" class="design-logo" ><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/asdesign-logo.png" class="logo" alt="Aaron Salley Design logo" /></a>
-			
+			<?php the_custom_logo(); ?>
+
 			<button class="menu-icon" type="button" data-toggle="offCanvasRight"></button>
-			
+
 			<?php wp_nav_menu( array('theme_location'=>'main', 'container'=>'nav', 'container_class'=>'site-nav') ); ?>
 			<?php wp_nav_menu( array('theme_location'=>'social',  'container_class'=>'social-links') ); ?>
 		</header>
-			
+
 		<div class="off-canvas position-right" id="offCanvasRight" data-off-canvas data-position="right">
 			<?php wp_nav_menu( array('theme_location'=>'main', 'container'=>'nav', 'container_class'=>'site-nav') ); ?>
 			<?php wp_nav_menu( array('theme_location'=>'social',  'container_class'=>'social-links') ); ?>

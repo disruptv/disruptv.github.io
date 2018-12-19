@@ -43,7 +43,7 @@ function design_setup() {
 		'main' => __( 'Primary Navigation Menu' ),
 		'social'  => __( 'Social Links Menu' ),
 	) );
-	
+
 	// Footer widget area.
 	register_sidebar( array(
 		'name' => __( 'Footer Widgets', 'design' ),
@@ -64,6 +64,14 @@ function design_setup() {
 
 	//add_theme_support( 'custom-header', array( 'width' => 1200, 'height' => 800, 'flex-width' => true, 'flex-height' => true ) );
 	add_theme_support( 'custom-background', array( 'wp-head-callback' => function() { return false; } ) );
+	add_theme_support( 'custom-logo' );
+	add_filter( 'get_custom_logo', 'change_logo_class' );
+	function change_logo_class( $html ) {
+			$html = str_replace( 'custom-logo', 'design-logo', $html );
+			$html = str_replace( 'custom-logo-link', 'disruptv-home-link', $html );
+
+			return $html;
+	}
 
 	// Indicate widget sidebars can use selective refresh in the Customizer.
 	add_theme_support( 'customize-selective-refresh-widgets' );
