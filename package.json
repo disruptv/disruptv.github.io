@@ -1,0 +1,33 @@
+{
+  "name": "disruptv",
+  "version": "4.0.0",
+  "description": "I have been described as a creative, an innovator, a visionary. I upset cyclical thought patterns and humanize technologies across industries. By transforming the way we work in the world from functional to smart, we can connect, optimize, and collaborate our way to a more prosperous future. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "babel-node scripts/start.js",
+    "build": "npx webpack-cli --config config/webpack.config.babel.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/disruptv/wordpress-portfolio.git"
+  },
+  "author": "Disruptv",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/disruptv/wordpress-portfolio#readme",
+  "dependencies": {
+    "foundation-sites": "^6.5.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/register": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "chalk": "^2.4.2",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.2.1"
+  }
+}
