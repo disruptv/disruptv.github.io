@@ -1,17 +1,12 @@
+'use strict';
+
 import chalk from 'chalk';
-import fs from 'fs';
-import path from 'path';
 import webpack from 'webpack';
 import webpackDevServer from 'webpack-dev-server';
 
+import paths from '../config/paths';
 import webpackConfig from '../config/webpack.config.babel';
 import webpackDevServerConfig from '../config/webpackDevServer.config.js';
-
-const appDirectory = fs.realpathSync(process.cwd());
-const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
-const paths = {
-  appPackageJson: resolveApp('package.json'),
-};
 
 const PORT = process.env.PORT || 4000;
 const HOST = process.env.HOST || '0.0.0.0';

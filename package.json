@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "babel-node scripts/start.js",
-    "build": "npx webpack-cli --config config/webpack.config.babel.js"
+    "start": "npx webpack-cli --config config/webpack.config.babel.js"
   },
   "repository": {
     "type": "git",
@@ -16,16 +15,36 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/disruptv/wordpress-portfolio#readme",
   "dependencies": {
-    "foundation-sites": "^6.5.3"
+    "axios": "^0.18.0",
+    "fast-average-color": "^4.3.0",
+    "foundation-sites": "^6.5.3",
+    "masonry-layout": "^4.2.2",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.4",
     "@babel/node": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.3.4",
     "@babel/preset-env": "^7.3.4",
+    "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",
+    "autoprefixer": "^9.5.0",
     "babel-loader": "^8.0.5",
+    "browser-sync": "^2.26.3",
+    "browser-sync-webpack-plugin": "^2.2.2",
     "chalk": "^2.4.2",
+    "clean-webpack-plugin": "^2.0.1",
+    "copy-webpack-plugin": "^5.0.1",
+    "css-loader": "^2.1.1",
+    "dotenv-webpack": "^1.7.0",
+    "file-loader": "^3.0.1",
+    "jquery": "^3.3.1",
+    "mini-css-extract-plugin": "^0.5.0",
+    "node-sass": "^4.11.0",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^7.1.0",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0",
     "webpack-dev-server": "^3.2.1"

@@ -12,6 +12,7 @@ const webpackDevServerConfig = {
   open: true,
   overlay: false,
   quiet: true,
+  writeToDisk: true,
   before(app, server){
     // This lets us fetch source contents from webpack for the error overlay
     // app.use(evalSourceMapMiddleware(server));
