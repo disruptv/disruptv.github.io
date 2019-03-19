@@ -172,21 +172,6 @@ if ( ! function_exists( 'disruptv_setup' ) ) :
 
 		// Add support for responsive embedded content.
 		add_theme_support( 'responsive-embeds' );
-
-		// Create Work post type
-		new custom_post_type( 'work', 'work', null, array(
-			'menu_icon'	=> 'dashicons-star-filled',
-	        'rewrite' => array( 'slug' => 'portfolio', 'with_front' => false, ),
-	        'hierarchical' => true,
-	        'supports' => array( 'title', 'editor', 'thumbnail', 'revisions', 'page-attributes', 'custom-fields', 'excerpt' ),
-		) );
-		new custom_taxonomy( 'work_platform', 'work', 'platforms', 'platform', array(
-			'hierarchical' => true,
-	        'show_admin_column'  => true,
-		) );
-		new custom_taxonomy( 'work_role', 'work', 'roles', 'role', array(
-	        'show_admin_column'  => true,
-		) );
 	}
 endif;
 add_action( 'after_setup_theme', 'disruptv_setup' );
@@ -251,5 +236,3 @@ function disruptv_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'disruptv_scripts' );
-
-require get_template_directory() . '/assets/classes/custom-post-type.php';

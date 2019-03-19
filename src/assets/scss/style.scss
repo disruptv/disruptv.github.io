@@ -1,3 +1,14 @@
+/*!
+  * Theme Name: Disruptv
+  * Author: Disruptv
+  * Author URI: https://disruptv.io
+  * Description: The Disruptv theme for WordPress.
+  * Version: 4.0.0
+  * License: MIT
+  * License URI: https://opensource.org/licenses/MIT
+  * Text Domain: disruptv
+  */
+
 @import 'settings';
 @import 'foundation';
 
@@ -67,6 +78,17 @@ body {
 
   .topbar {
     @include top-bar-container;
+    width: 100%;
+    max-width: $global-width;
+    min-height: rem-calc(74);
+    margin: auto;
+
+    .branding {
+      img {
+        max-height: rem-calc(48);
+        width: auto;
+      }
+    }
 
     & > .menu {
       @include menu-base;
@@ -74,159 +96,195 @@ body {
         $dir: horizontal,
       )
     }
-
-    a {
-      color: inherit;
-
-      &:hover {
-        color: $primary-color;
-      }
-    }
   }
 
   .main {
-    @include xy-grid(
-      $direction: horizontal,
-      $wrap: true,
-    );
-    @include xy-cell(
-      $size: 12,
-      $gutters: 0,
+    @include xy-cell-block(
+      $vertical: true,
     );
     flex: 1 100%;
+    min-height: auto;
 
     .container {
-      @include xy-cell(12);
-      @include xy-cell-block(
-        $vertical: true,
+      @include xy-cell(
+        $size: 12,
+        $gutters: 0,
       );
     }
   }
 
   .bottombar {
-    @include xy-cell(
-      $size: 12,
-      $gutters: 0,
-    );
-    min-height: rem-calc(48);
-  }
-}
+    padding-top: rem-calc(72);
+    padding-bottom: rem-calc(72);
 
-.topbar {
-  min-height: rem-calc(48);
+    .container {
+      @include xy-grid-container(
+        $padding: 0,
+      );
+      position: relative;
+    }
 
-  .branding {
-    img {
-      max-height: rem-calc(48);
-      width: auto;
+    .section-title {
+      position: absolute;
+      top: -.9em;
+      left: 0;
+    }
+
+    .widget {
+      @include xy-cell(
+        $size: 12,
+      );
+      @include breakpoint(medium) {
+        @include xy-cell(
+          $size: 6,
+          $gutters: 0,
+        );
+      }
+      position: relative;
+      padding-bottom: rem-calc(72);
+
+      &.email {
+        display: block;
+        padding-top: rem-calc(36);
+
+        &::after {
+          @include xy-cell(
+            $size: 1,
+            $gutters: 0,
+          );
+          content:'';
+          position: absolute;
+          bottom: rem-calc(36);
+          left: 0;
+          display: block;
+          height: rem-calc(8);
+          background-color: $black;
+        }
+      }
+
+      .menu {
+        .menu-item:first-child() a {
+          padding-left: 0;
+        }
+      }
     }
   }
 }
 
-.home {
-  .main .page {
-    display: flex;
+.main .container > .hentry {
+  &.page,
+  .header {
+    @include xy-cell-block-container;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
+    min-height: calc(100vh - 74px);
     @include breakpoint(medium) {
       min-height: 50vh;
     }
   }
 
-  #archive {
-    @include xy-grid();
+  .content {
     @include xy-grid-container(
+      $width: $global-width/1.5,
       $padding: 0,
     );
-    margin: auto;
-    position: relative;
+  }
+}
 
-    .hentry,
-    .grid-sizer {
-      overflow: hidden;
-      position: relative;
+
+.archive {
+  @include xy-grid();
+  @include xy-grid-container(
+    $padding: 0,
+  );
+  position: relative;
+  margin: rem-calc(64) auto;
+  padding-top: rem-calc(64);
+
+  .hentry,
+  .grid-sizer {
+    overflow: hidden;
+    position: relative;
+    @include xy-cell(
+      $size: 12,
+      $gutters: 0,
+    );
+    padding-bottom: 50%;
+
+    @include breakpoint(medium){
+      @include xy-cell(
+        $size: 6,
+        $gutters: 0,
+      );
+      padding-bottom: 35%;
+    }
+
+    *,
+    &::before {
+      transition: all 7s ease-in-out;
+    }
+
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: -1;
+      opacity: 0;
+    }
+
+    &:hover {
+      .image {
+        transform: scale(1.2);
+      }
+
+      &::before {
+        opacity: .75;
+      }
+    }
+
+    &.section-title {
+      position: absolute;
+      top: -.1em;
+      left: 0;
+    }
+
+    body:not(.single) &.is-sticky {
       @include xy-cell(
         $size: 12,
         $gutters: 0,
       );
-      padding-bottom: 50%;
+    }
 
-      @include breakpoint(medium){
-        @include xy-cell(
-          $size: 6,
-          $gutters: 0,
-        );
-        padding-bottom: 35%;
+    .image {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: -2;
+      background-size: cover;
+      background-position: center;
+
+      img {
+        display: none !important;
       }
+    }
 
-      *,
-      &::before {
-        transition: all 7s ease-in-out;
-      }
+    .meta {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
 
-      &::before {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        z-index: -1;
-        opacity: 0;
-      }
-
-      &:hover {
-        .image {
-          transform: scale(1.2);
-        }
-
-        &::before {
-          opacity: .5;
-        }
-      }
-
-      &.is-sticky {
-        @include xy-cell(
-          $size: 12,
-          $gutters: 0,
-        );
-      }
-
-      &.section-title {
-        position: absolute;
-        top: -.9em;
-        left: 0;
-      }
-
-      .image {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        z-index: -2;
-        background-size: cover;
-        background-position: center;
-
-        img {
-          display: none !important;
-        }
-      }
-
-      .header {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-      }
-
-      .title,
-      .excerpt {
-        opacity: 0;
-      }
+    .title,
+    .excerpt {
+      opacity: 0;
     }
   }
 }

@@ -3,8 +3,13 @@
 import BrowserSyncPlugin from 'browser-sync-webpack-plugin';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
+import Dotenv from 'dotenv-webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import path from 'path';
+import safePostCssParser from 'postcss-safe-parser';
+import TerserPlugin from 'terser-webpack-plugin';
+
 import paths from './paths';
 
 const entry = {
@@ -66,7 +71,7 @@ const rules = [
           //   return generateScopedName(localName, context.resourcePath);
           // },
           // localIdentName: '[name]_[local]_[hash:base64:5]',
-          sourceMap: true,
+          sourceMap: process.env.NODE_ENV !== 'production' ? true : false,
           importLoaders: 2,
         },
       },
@@ -81,7 +86,7 @@ const rules = [
               'ios >= 7',
             ],
           })],
-          sourceMap: true,
+          sourceMap: process.env.NODE_ENV !== 'production' ? true : false,
         },
       },
       {
@@ -91,7 +96,7 @@ const rules = [
             path.resolve(__dirname, '../node_modules'),
             path.resolve(__dirname, '../node_modules/foundation-sites/scss'),
           ],
-          sourceMap: true,
+          sourceMap: process.env.NODE_ENV !== 'production' ? true : false,
         },
       },
     ],
@@ -114,6 +119,51 @@ const externals = {
   // react: 'React',
   // reactDOM: 'ReactDOM',
 }
+const optimization = {
+  minimize: process.env.NODE_ENV === 'production' ? true : false,
+  minimizer: [
+    new TerserPlugin({
+      terserOptions: {
+        parse: {
+          ecma: 8,
+        },
+        compress: {
+          ecma: 5,
+          warnings: false,
+          comparisons: false,
+          inline: 2,
+        },
+        mangle: {
+          safari10: true,
+        },
+        output: {
+          ecma: 5,
+          comments: false,
+          ascii_only: true,
+        },
+      },
+      parallel: true,
+      cache: true,
+      sourceMap: process.env.NODE_ENV !== 'production' ? true : false,
+    }),
+    // This is only used in production mode
+    new OptimizeCSSAssetsPlugin({
+      cssProcessorOptions: {
+        parser: safePostCssParser,
+        map: process.env.NODE_ENV !== 'production' ? true : false
+          ? {
+              inline: false,
+              annotation: true,
+            }
+          : false,
+      },
+    }),
+  ],
+  // splitChunks: {
+  //   chunks: 'all',
+  //   name: false,
+  // },
+}
 const plugins = [
   new BrowserSyncPlugin({
     host: process.env.HOST || '0.0.0.0',
@@ -129,9 +179,9 @@ const plugins = [
     context: 'src/',
   }
   ),
-  // new Dotenv({
-  //   path: envfile,
-  // }),
+  new Dotenv({
+    path: paths.envfile,
+  }),
   new MiniCssExtractPlugin({
     filename: 'style.css',
     chunkFilename: process.env.NODE_ENV !== 'production' ?
@@ -144,10 +194,11 @@ const webpackConfig = {
   context: path.resolve(__dirname, '../'),
   entry: entry,
   output: output,
+  optimization: optimization,
   module: modules,
   resolve: resolve,
   performance: performance,
-  devtool: 'inline-source-map',
+  devtool: process.env.NODE_ENV === 'production' ? false : 'inline-source-map',
   target: 'web',
   externals: externals,
   stats: 'errors-only',
