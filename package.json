@@ -1,0 +1,58 @@
+{
+  "name": "disruptv",
+  "version": "4.0.0",
+  "description": "I have been described as a creative, an innovator, a visionary. I upset cyclical thought patterns and humanize technologies across industries. By transforming the way we work in the world from functional to smart, we can connect, optimize, and collaborate our way to a more prosperous future. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx webpack-cli --config config/webpack.config.babel.js",
+    "build": "npx webpack-cli --config config/webpack.config.babel.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/disruptv/wordpress-portfolio.git"
+  },
+  "author": "Disruptv",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/disruptv/wordpress-portfolio#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "fast-average-color": "^4.3.0",
+    "foundation-sites": "^6.5.3",
+    "masonry-layout": "^4.2.2",
+    "raven-js": "^3.27.0",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/node": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "autoprefixer": "^9.5.0",
+    "babel-loader": "^8.0.5",
+    "browser-sync": "^2.26.3",
+    "browser-sync-webpack-plugin": "^2.2.2",
+    "chalk": "^2.4.2",
+    "clean-webpack-plugin": "^2.0.1",
+    "copy-webpack-plugin": "^5.0.1",
+    "css-loader": "^2.1.1",
+    "dotenv": "^7.0.0",
+    "dotenv-webpack": "^1.7.0",
+    "file-loader": "^3.0.1",
+    "jquery": "^3.3.1",
+    "mini-css-extract-plugin": "^0.5.0",
+    "node-sass": "^4.11.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "postcss-loader": "^3.0.0",
+    "postcss-safe-parser": "^4.0.1",
+    "sass-loader": "^7.1.0",
+    "terser-webpack-plugin": "^1.2.3",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.2.1"
+  }
+}
