@@ -2,12 +2,11 @@
 
 import $ from 'jquery';
 import FastAverageColor from 'fast-average-color/dist/index.es6';
-// import Foundation from 'foundation-sites';
+import Foundation from 'foundation-sites';
 import Masonry from 'masonry-layout';
 import Raven from 'raven-js';
 
-// Foundation.addToJquery($);
-// $(document).foundation();
+Foundation.addToJquery($);
 
 (function workColors() {
   const fac = new FastAverageColor();
@@ -55,20 +54,24 @@ import Raven from 'raven-js';
   }
 })();
 
+//height fix
+if (Foundation.MediaQuery.is('small only')) {
+  window.onresize = () => {
+    const height = window.innerHeight - $('.topbar').height();
+
+    $('.main .container>.hentry .header').height(height);
+    $('.main .container>.hentry.page').height(height);
+  }
+  window.onresize(); // called to initially set the height.
+}
+
 if (process.env.NODE_ENV === 'production') {
   Raven.config(process.env.SENTRY_DSN).install();
-
-  // (function(w, d, s, l, i) {
-  //   w[l]=w[l]||[]; w[l].push({'gtm.start':
-  //   new Date().getTime(), 'event': 'gtm.js'}); let f=d.getElementsByTagName(s)[0];
-  //   let j=d.createElement(s); let dl=l!='dataLayer'?'&l='+l:''; j.async=true; j.src=
-  //   'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f);
-  // })(window, document, 'script', 'dataLayer', process.env.GTM_ID);
 
   (function(w,d,s,l,i){
     w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});let f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-N5P494');
+  })(window,document,'script','dataLayer',process.env.GTM);
 }
