@@ -4,6 +4,7 @@
                 'ignore_sticky_posts'   =>  1,
                 'orderby'               =>  'date',
                 'order'                 =>  'DESC',
+                'category_name'         =>  'work',
               );
   if ( is_single() ) {
     $options['posts_per_page'] = 2;
