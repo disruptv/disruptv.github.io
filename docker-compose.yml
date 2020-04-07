@@ -2,20 +2,24 @@ version: '3.7'
 
 services:
   wordpress:
+    # Remember to run
+    # docker-compose exec wordpress chown -R www-data:www-data /var/www/html
     image: wordpress
     restart: always
     ports:
-      - 9000:80
+      - "8080:80"
     environment:
       WORDPRESS_DB_PASSWORD: password
-      WORDPRESS_TABLE_PREFIX: disruptv_
+      WORDPRESS_DEBUG: 1
       WORDPRESS_CONFIG_EXTRA: |
         define('WP_MEMORY_LIMIT', '128M');
         define('WP_DEFAULT_THEME', 'Disruptv');
+      WORDPRESS_TABLE_PREFIX: disruptv_
     volumes:
-      - ./dist:/var/www/html/wp-content/themes/disruptv
-      - ./wordpress/wp-plugins:/var/www/html/wp-content/plugins
-      - ./wordpress/wp-uploads:/var/www/html/wp-content/uploads
+      - ./.build:/var/www/html/wp-content/themes/disruptv
+      - ./e2e/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+      - wp-content:/var/www/html/wp-content/plugins
+      - wp-content:/var/www/html/wp-content/uploads
     depends_on:
       - mysql
   mysql:
@@ -24,4 +28,14 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: password
     volumes:
-      - ./wordpress/wp-data:/var/lib/mysql
+      - wp-data:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: mysql
+    depends_on:
+      - mysql
+
+volumes:
+  wp-content:
+  wp-data:
