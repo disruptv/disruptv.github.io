@@ -188,8 +188,9 @@ function disruptv_register_scripts() {
 		wp_enqueue_script( 'comment-reply' );
 	}
 
-	wp_enqueue_script( 'disruptv-js', get_template_directory_uri() . '/static/js/react.js', array(), $theme_version, false );
-	wp_script_add_data( 'disruptv-js', 'async', true );
+	wp_enqueue_script( 'disruptv-js', get_template_directory_uri() . '/static/js/vendors.js', array(), $theme_version, false );
+	wp_enqueue_script( 'disruptv-react', get_template_directory_uri() . '/static/js/react.js', array(), $theme_version, false );
+	wp_script_add_data( 'disruptv-react', 'async', true );
 
 }
 
@@ -574,6 +575,16 @@ function disruptv_customize_controls_enqueue_scripts() {
 }
 
 add_action( 'customize_controls_enqueue_scripts', 'disruptv_customize_controls_enqueue_scripts' );
+
+/**
+ * Add core support for Elementor
+ */
+function theme_prefix_register_elementor_locations( $elementor_theme_manager ) {
+
+	$elementor_theme_manager->register_all_core_location();
+
+}
+add_action( 'elementor/theme/register_locations', 'theme_prefix_register_elementor_locations' );
 
 /**
  * Enqueue scripts for the customizer preview.
