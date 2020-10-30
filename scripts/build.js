@@ -26,5 +26,34 @@ const config = configFactory('production');
 // if you're in it, you don't end up in Trash
 fs.emptyDirSync(paths.appBuild);
 // Start the webpack build
-const compiler = webpack(config);
-compiler.run();
+webpack(config, (err, stats) => {
+  if (err) {
+    console.error(err.stack || err);
+
+    if (err.details) {
+      console.error(err.details);
+    }
+
+    return;
+  }
+
+  if (stats.hasErrors()) {
+    console.error(stats.toString({
+      all: false,
+      colors: true,
+      errors: true,
+    }));
+    console.log();
+    return;
+  }
+
+  if (stats.hasWarnings()) {
+    console.warn(stats.toString({
+      all: false,
+      colors: true,
+      errors: true,
+    }));
+  }
+
+  console.log('\x1b[32m%s\x1b[0m', 'Build succeeded. \n');
+});
