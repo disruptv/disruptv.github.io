@@ -9,6 +9,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const safePostCssParser = require('postcss-safe-parser');
 const postcssNormalize = require('postcss-normalize');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 const paths = require('./paths');
 const appPackageJson = require(paths.appPackageJson);
@@ -24,7 +25,7 @@ const sassRegex = /\.(scss|sass|pcss)$/;
 
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
-module.exports = function(webpackEnv = 'development') {
+module.exports = function (webpackEnv = 'development') {
   const isEnvDevelopment = webpackEnv === 'development';
   const isEnvProduction = webpackEnv === 'production';
 
@@ -64,18 +65,18 @@ module.exports = function(webpackEnv = 'development') {
     ].filter(Boolean);
     if (preProcessor) {
       loaders.push(
-          {
-            loader: require.resolve('resolve-url-loader'),
-            options: {
-              sourceMap: isEnvProduction && shouldUseSourceMap,
-            },
+        {
+          loader: require.resolve('resolve-url-loader'),
+          options: {
+            sourceMap: isEnvProduction && shouldUseSourceMap,
           },
-          {
-            loader: require.resolve(preProcessor),
-            options: {
-              sourceMap: true,
-            },
+        },
+        {
+          loader: require.resolve(preProcessor),
+          options: {
+            sourceMap: true,
           },
+        },
       );
     }
     return loaders;
@@ -135,7 +136,7 @@ module.exports = function(webpackEnv = 'development') {
               false,
           },
           cssProcessorPluginOptions: {
-            preset: ['default', {minifyFontValues: {removeQuotes: false}}],
+            preset: ['default', { minifyFontValues: { removeQuotes: false } }],
           },
         }),
       ],
@@ -143,8 +144,8 @@ module.exports = function(webpackEnv = 'development') {
     resolve: {
       modules: ['node_modules', paths.appNodeModules],
       extensions: paths.moduleFileExtensions
-          .map((ext) => `.${ext}`)
-          .filter((ext) => useTypeScript || !ext.includes('ts')),
+        .map((ext) => `.${ext}`)
+        .filter((ext) => useTypeScript || !ext.includes('ts')),
     },
     externals: {
       jquery: 'jQuery',
@@ -152,7 +153,7 @@ module.exports = function(webpackEnv = 'development') {
     module: {
       strictExportPresence: true,
       rules: [
-        {parser: {requireEnsure: false}},
+        { parser: { requireEnsure: false } },
         {
           test: /\.js$/,
           enforce: 'pre',
@@ -195,11 +196,11 @@ module.exports = function(webpackEnv = 'development') {
             {
               test: sassRegex,
               use: getStyleLoaders(
-                  {
-                    importLoaders: 3,
-                    sourceMap: isEnvProduction && shouldUseSourceMap,
-                  },
-                  'sass-loader',
+                {
+                  importLoaders: 3,
+                  sourceMap: isEnvProduction && shouldUseSourceMap,
+                },
+                'sass-loader',
               ),
               sideEffects: true,
             },
@@ -227,6 +228,7 @@ module.exports = function(webpackEnv = 'development') {
         context: 'src',
         ignore: ['*.js', '*.scss'],
       }),
+      new Dotenv(),
     ].filter(Boolean),
     node: {
       module: 'empty',

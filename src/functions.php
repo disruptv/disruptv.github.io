@@ -164,14 +164,14 @@ function disruptv_register_styles() {
 
 	$theme_version = wp_get_theme()->get( 'Version' );
 
-	wp_enqueue_style( 'disruptv-style', get_template_directory_uri() . '/static/css/style.css', array(), $theme_version );
+	wp_enqueue_style( 'disruptv-style', get_template_directory_uri() . '/assets/css/style.css', array(), $theme_version );
 	wp_style_add_data( 'disruptv-style', 'rtl', 'replace' );
 
 	// Add output of Customizer settings as inline style.
 	wp_add_inline_style( 'disruptv-style', disruptv_get_customizer_css( 'front-end' ) );
 
 	// Add print CSS.
-	wp_enqueue_style( 'disruptv-print-style', get_template_directory_uri() . '/static/css/print.css', null, $theme_version, 'print' );
+	wp_enqueue_style( 'disruptv-print-style', get_template_directory_uri() . '/assets/css/print.css', null, $theme_version, 'print' );
 
 }
 
@@ -188,8 +188,8 @@ function disruptv_register_scripts() {
 		wp_enqueue_script( 'comment-reply' );
 	}
 
-	wp_enqueue_script( 'disruptv-js', get_template_directory_uri() . '/static/js/vendors.js', array(), $theme_version, false );
-	wp_enqueue_script( 'disruptv-react', get_template_directory_uri() . '/static/js/react.js', array(), $theme_version, false );
+	wp_enqueue_script( 'disruptv-js', get_template_directory_uri() . '/assets/js/vendors.js', array(), $theme_version, false );
+	wp_enqueue_script( 'disruptv-react', get_template_directory_uri() . '/assets/js/react.js', array(), $theme_version, false );
 	wp_script_add_data( 'disruptv-react', 'async', true );
 
 }
@@ -375,7 +375,7 @@ function disruptv_block_editor_styles() {
 	$css_dependencies = array();
 
 	// Enqueue the editor styles.
-	wp_enqueue_style( 'disruptv-block-editor-styles', get_theme_file_uri( '/static/css/editor-style-block.css' ), $css_dependencies, wp_get_theme()->get( 'Version' ), 'all' );
+	wp_enqueue_style( 'disruptv-block-editor-styles', get_theme_file_uri( '/assets/css/editor-style-block.css' ), $css_dependencies, wp_get_theme()->get( 'Version' ), 'all' );
 	wp_style_add_data( 'disruptv-block-editor-styles', 'rtl', 'replace' );
 
 	// Add inline style from the Customizer.
@@ -385,7 +385,7 @@ function disruptv_block_editor_styles() {
 	wp_add_inline_style( 'disruptv-block-editor-styles', disruptv_Non_Latin_Languages::get_non_latin_css( 'block-editor' ) );
 
 	// Enqueue the editor script.
-	wp_enqueue_script( 'disruptv-block-editor-script', get_theme_file_uri( '/static/js/wordpress.js' ), array( 'wp-blocks', 'wp-dom' ), wp_get_theme()->get( 'Version' ), true );
+	wp_enqueue_script( 'disruptv-block-editor-script', get_theme_file_uri( '/assets/js/wordpress.js' ), array( 'wp-blocks', 'wp-dom' ), wp_get_theme()->get( 'Version' ), true );
 }
 
 add_action( 'enqueue_block_editor_assets', 'disruptv_block_editor_styles', 1, 1 );
@@ -396,7 +396,7 @@ add_action( 'enqueue_block_editor_assets', 'disruptv_block_editor_styles', 1, 1 
 function disruptv_classic_editor_styles() {
 
 	$classic_editor_styles = array(
-		'/static/css/editor-style-classic.css',
+		'/assets/css/editor-style-classic.css',
 	);
 
 	add_editor_style( $classic_editor_styles );
@@ -570,7 +570,7 @@ function disruptv_customize_controls_enqueue_scripts() {
 	$theme_version = wp_get_theme()->get( 'Version' );
 
 	// Add script for controls.
-	wp_enqueue_script( 'disruptv-customize-controls', get_template_directory_uri() . '/static/js/wordpress.js', array( 'customize-controls', 'underscore', 'jquery' ), $theme_version, false );
+	wp_enqueue_script( 'disruptv-customize-controls', get_template_directory_uri() . '/assets/js/wordpress.js', array( 'customize-controls', 'underscore', 'jquery' ), $theme_version, false );
 	wp_localize_script( 'disruptv-customize-controls', 'disruptvBgColors', disruptv_get_customizer_color_vars() );
 }
 
@@ -596,7 +596,7 @@ add_action( 'elementor/theme/register_locations', 'theme_prefix_register_element
 function disruptv_customize_preview_init() {
 	$theme_version = wp_get_theme()->get( 'Version' );
 
-	wp_enqueue_script( 'disruptv-customize-preview', get_theme_file_uri( '/static/js/wordpress.js' ), array( 'customize-preview', 'customize-selective-refresh', 'jquery' ), $theme_version, true );
+	wp_enqueue_script( 'disruptv-customize-preview', get_theme_file_uri( '/assets/js/wordpress.js' ), array( 'customize-preview', 'customize-selective-refresh', 'jquery' ), $theme_version, true );
 	wp_localize_script( 'disruptv-customize-preview', 'disruptvBgColors', disruptv_get_customizer_color_vars() );
 	wp_localize_script( 'disruptv-customize-preview', 'disruptvPreviewEls', disruptv_get_elements_array() );
 

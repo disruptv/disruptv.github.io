@@ -1,6 +1,6 @@
 {
   "name": "disruptv",
-  "version": "4.5.1",
+  "version": "4.5.3",
   "description": "Disruptv wordpress theme",
   "main": "index.js",
   "scripts": {
@@ -41,6 +41,7 @@
     "css-loader": "^3.4.2",
     "dotenv": "^8.2.0",
     "dotenv-expand": "^5.1.0",
+    "dotenv-webpack": "^6.0.0",
     "eslint": "^6.8.0",
     "eslint-config-google": "^0.14.0",
     "eslint-loader": "^4.0.0",
