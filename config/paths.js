@@ -31,6 +31,7 @@ const appCopyFiles = [
   'assets/img/**',
   'classes/**',
   'inc/**',
+  'template-parts/**',
 ];
 
 const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath);
