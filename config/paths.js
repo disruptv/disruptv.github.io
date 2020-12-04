@@ -39,26 +39,17 @@ module.exports = {
   dotenv: resolveApp('.env'),
   appPath: resolveApp('.'),
   appBuild: resolveApp('disruptv'),
-  appTemp: resolveApp('.build'),
+  appTemp: resolveApp('disruptv'),
   appFiles: {
-    'style': process.env.NODE_ENV === 'development' ?
-      [hmr, resolveApp('src/assets/scss/style.scss')] :
-      resolveApp('src/assets/scss/style.scss'),
+    'screen': process.env.NODE_ENV === 'development' ?
+      [hmr, resolveApp('src/assets/scss/screen.scss')] :
+      resolveApp('src/assets/scss/screen.scss'),
     'print': process.env.NODE_ENV === 'development' ?
       [hmr, resolveApp('src/assets/scss/print.scss')] :
       resolveApp('src/assets/scss/print.scss'),
     'vendors': process.env.NODE_ENV === 'development' ?
       [hmr, resolveApp('src/assets/js/vendors.js')] :
       resolveApp('src/assets/js/vendors.js'),
-    'wordpress': [
-      resolveApp('src/assets/js/color-calculations.js'),
-      resolveApp('src/assets/js/customize-controls.js'),
-      resolveApp('src/assets/js/customize-preview.js'),
-      resolveApp('src/assets/js/customize.js'),
-      resolveApp('src/assets/js/editor-script-block.js'),
-      resolveApp('src/assets/js/index.js'),
-      resolveApp('src/assets/js/skip-link-focus-fix.js'),
-    ],
   },
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),

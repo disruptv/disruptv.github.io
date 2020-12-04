@@ -52,7 +52,7 @@ browserSync.init({
   snippetOptions: {
     rule: {
       match: /<\/head>/i,
-      fn: function(snippet, match) {
+      fn: function (snippet, match) {
         return `<script src="${paths.appTemp}"></script>${snippet}${match}`;
       },
     },

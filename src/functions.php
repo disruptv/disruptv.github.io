@@ -116,14 +116,15 @@ function disruptv_register_scripts() {
 
 	$theme_version = wp_get_theme()->get( 'Version' );
 
-	wp_enqueue_style( 'disruptv-print-style', get_template_directory_uri() . '/assets/css/print.css', null, $theme_version, 'print' );
-	wp_enqueue_style( 'disruptv-style', get_template_directory_uri() . '/assets/css/screen.css', array(), $theme_version );
-	wp_style_add_data( 'disruptv-style', 'rtl', 'replace' );
+	wp_enqueue_style( 'disruptv-print', get_template_directory_uri() . '/assets/css/print.css', null, $theme_version, 'print' );
+	wp_enqueue_style( 'disruptv-screen', get_template_directory_uri() . '/assets/css/screen.css', array(), $theme_version );
+	wp_style_add_data( 'disruptv-screen', 'rtl', 'replace' );
 
 	wp_enqueue_script( 'disruptv-js', get_template_directory_uri() . '/assets/js/vendors.js', array(), $theme_version, false );
-	wp_enqueue_script( 'disruptv-react', get_template_directory_uri() . '/assets/js/react.js', array(), $theme_version, false );
-	wp_script_add_data( 'disruptv-react', 'async', true );
 
+	wp_dequeue_style( 'wp-block-library' );
+  wp_dequeue_style( 'wp-block-library-theme' );
+  wp_dequeue_style( 'wc-block-style' ); // Remove WooCommerce block CSS
 }
 add_action( 'wp_enqueue_scripts', 'disruptv_register_scripts' );
 

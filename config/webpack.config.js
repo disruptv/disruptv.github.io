@@ -37,8 +37,7 @@ module.exports = function (webpackEnv = 'development') {
   // common function to get style loaders
   const getStyleLoaders = (cssOptions, preProcessor) => {
     const loaders = [
-      isEnvDevelopment && require.resolve('style-loader'),
-      isEnvProduction && {
+      {
         loader: MiniCssExtractPlugin.loader,
       },
       {
@@ -220,7 +219,6 @@ module.exports = function (webpackEnv = 'development') {
     plugins: [
       isEnvDevelopment && new webpack.HotModuleReplacementPlugin(),
       isEnvDevelopment && new CaseSensitivePathsPlugin(),
-      isEnvProduction &&
       new MiniCssExtractPlugin({
         filename: 'assets/css/[name].css',
       }),
