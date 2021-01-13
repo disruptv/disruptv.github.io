@@ -57,8 +57,12 @@ function remove_api_from_head(){
 add_action( 'after_setup_theme', 'remove_api_from_head');
 
 function cleanup_qstring( $src ) {
-  $parts = explode( '?ver', $src );
-  return $parts[0];
+  if ( !is_admin() ) {
+    $parts = preg_split( '/[?&]+(ver)/', $src );
+    return $parts[0];
+  }
+  
+  return $src;
 }
 add_filter( 'script_loader_src', 'cleanup_qstring', 15, 1 ); 
 add_filter( 'style_loader_src', 'cleanup_qstring', 15, 1 );
