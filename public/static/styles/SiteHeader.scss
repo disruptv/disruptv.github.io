@@ -1,0 +1,13 @@
+.SiteHeader {
+  z-index: 10;
+  display: flex;
+  justify-content: flex-end;
+  @include make-container(0);
+  @include make-container-max-widths();
+
+  .site-logo {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+}

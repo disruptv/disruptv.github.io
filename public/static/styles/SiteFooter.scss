@@ -1,0 +1,27 @@
+.SiteFooter {
+  padding: 8rem 0;
+  color: var(--white);
+  background-color: var(--background);
+  @include make-row();
+
+  &__wrapper {
+    margin: auto;
+    @include make-container-max-widths();
+    @include make-col-ready();
+
+    & > div {
+      display: flex;
+      align-items: flex-start;
+      @include make-col(12);
+    }
+
+    strong {
+      display: block;
+    }
+
+    small {
+      display: flex;
+      align-items: center;
+    }
+  }
+}

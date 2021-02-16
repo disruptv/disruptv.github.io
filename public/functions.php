@@ -1,7 +1,7 @@
 <?php 
-if( !function_exists('__disruptv_setup') ) {
-  function mtf_setup() {
-    load_theme_textdomain( '__disruptv' );
+if( !function_exists('disruptv_setup') ) {
+  function disruptv_setup() {
+    load_theme_textdomain( 'disruptv' );
 
     add_theme_support( 'custom-logo' );
     add_theme_support( 'title-tag' );
@@ -30,4 +30,4 @@ if( !function_exists('__disruptv_setup') ) {
     ]);
   }
 }
-add_action('after_setup_theme', '__disruptv_setup');
+add_action('after_setup_theme', 'disruptv_setup');

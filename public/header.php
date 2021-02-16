@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html <?php language_attributes(); ?>>
+<html <?php language_attributes(); ?> class="wordpress">
   <head>
     <?php wp_head(); ?>
     <meta charset="utf-8" />
@@ -27,4 +27,21 @@
     -->
     <%= htmlWebpackPlugin.tags.headTags %>
   </head>
-  <body>
+  <body <?php body_class('disruptv'); ?>>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root" style="display: none !important;">
+      <!--
+        This HTML file is a template.
+        If you open it directly in the browser, you will see an empty page.
+
+        You can add webfonts, meta tags, or analytics to this file.
+        The build step will place the bundled scripts into the <body> tag.
+
+        To begin the development, run `npm start` or `yarn start`.
+        To create a production bundle, use `npm run build` or `yarn build`.
+      -->
+    </div>
+    <header class="SiteHeader">
+      <?php the_custom_logo(); ?>
+      <?php get_template_part( 'template_parts/nav', 'site' ); ?>
+    </header>
