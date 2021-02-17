@@ -5,7 +5,7 @@ if( !function_exists('disruptv_setup') ) {
 
     add_theme_support( 'custom-logo' );
     add_theme_support( 'title-tag' );
-    add_theme_support( 'custom-background' );
+    // add_theme_support( 'custom-background' );
     add_theme_support( 'automatic-feed-links' );
     add_theme_support( 'post-thumbnails' );
     add_theme_support( 'align-wide' );
@@ -78,3 +78,4 @@ function get_rest_menus( $request ) {
 }
 
 // TODO: Add custom logo to API
+// TODO: Get page set as home via API

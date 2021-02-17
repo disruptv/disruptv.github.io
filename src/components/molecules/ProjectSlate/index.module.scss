@@ -3,11 +3,11 @@
 @import "~bootstrap/scss/mixins";
 
 .container {
-  @include make-row();
-  @include make-container(0);
-  @include make-container-max-widths();
+  height: 100vh;
+  @include make-col(12);
 
-  .SocialMenu {
-    padding: 0;
+  .title {
+    @include make-container();
+    @include make-container-max-widths();
   }
 }

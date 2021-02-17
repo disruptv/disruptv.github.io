@@ -12,6 +12,6 @@ const composedEnhancer = composeWithDevTools(
 const store = createStore(rootReducer, composedEnhancer);
 store.dispatch(getProjects());
 store.dispatch(getSiteNav());
-store.dispatch(getSocialMenu);
+// store.dispatch(getSocialMenu);
 
 export default store;

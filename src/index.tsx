@@ -16,7 +16,7 @@ ReactDOM.render(
   <Provider store={store}>
     <React.Fragment>
       <Router>
-        <SiteHeader></SiteHeader>
+        {/* <SiteHeader></SiteHeader> */}
         <Switch>
           <Route path='/'>
             <Home />

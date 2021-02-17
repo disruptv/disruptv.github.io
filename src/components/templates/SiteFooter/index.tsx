@@ -13,7 +13,7 @@ const mapPropsToState = (state: any, ownProps: any) => {
 const SiteFooter = (props: any) => {
   return (
     <footer className={styles.container}>
-      <menu>
+      <menu className={styles.SocialMenu}>
         <SocialMenu items={props.socialMenu} />
       </menu>
     </footer>

@@ -1,27 +1,28 @@
 import React from "react";
 import { connect } from "react-redux";
+import ProjectSlate from "../../molecules/ProjectSlate";
 import styles from "./index.module.scss";
 
 const mapStateToProps = (state: any, ownProps: any) => {
-  const { projects } = state;
+  const { projects, home } = state;
   return {
-    projects: projects,
-    page: {
-      title: `I work with startups and top companies to
-      design intentional, radical, innovative digital products.`,
-      excerpt: `I'm Aaron Salley. My philosophy leverages connections between
-      diverse experiences. Having been in the arts and tech, I have an
-      uncommon mix of heart-centered, mission-driven values, and a
-      pragmatic, nimble ability to execute; as an industry-disruptive
-      innovator focused on the collective advancement of global society, I
-      bring conscientiousness, creativity, and strategic thinking to all
-      that I do.`,
-    },
+    projects,
+    home,
   };
 };
 
 const Home = (props: any) => {
-  const { title, excerpt } = props.page;
+  const { title, excerpt } = props.home;
+
+  let intro = excerpt.split("</br>");
+  intro = intro.map((p: string, i: number) => {
+    return <p key={i}>{p}</p>;
+  });
+
+  const projects = props.projects.map((project: any, i: number) => {
+    return <ProjectSlate {...project} key={i} />;
+  });
+
   return (
     <main className={styles.container}>
       <section className={styles.Section__intro}>
@@ -29,8 +30,9 @@ const Home = (props: any) => {
           <small>Hey there,</small>
           {title}
         </h1>
-        <p>{excerpt}</p>
+        <div className={styles.intro}>{intro}</div>
       </section>
+      {/* <section className={styles.Section__showcase}>{projects}</section> */}
     </main>
   );
 };

@@ -13,6 +13,18 @@ const $http = axios.create({
   baseURL: "?rest_route=/wp/v2/",
 });
 
+export const HOME = "HOME";
+export const getHome = (): ThunkAction => {
+  return async (dispatch: Dispatch, getState: unknown): Promise<AnyAction> => {
+    const response = await $http.get("/posts");
+
+    return dispatch({
+      type: HOME,
+      payload: response.data,
+    });
+  };
+};
+
 export const PROJECTS = "PROJECTS";
 export const getProjects = (): ThunkAction => {
   return async (dispatch: Dispatch, getState: unknown): Promise<AnyAction> => {
