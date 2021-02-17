@@ -1,13 +1,31 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./assets/styles/index.scss";
-import App from "./components/templates/App";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 
+import { Provider } from "react-redux";
+import store from "./store";
+
+import SiteFooter from "./components/templates/SiteFooter";
+import SiteHeader from "./components/templates/SiteHeader";
+
+import "./assets/styles/index.scss";
+import Home from "./components/views/Home";
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store}>
+    <React.Fragment>
+      <Router>
+        <SiteHeader></SiteHeader>
+        <Switch>
+          <Route path='/'>
+            <Home />
+          </Route>
+        </Switch>
+        <SiteFooter></SiteFooter>
+      </Router>
+    </React.Fragment>
+  </Provider>,
   document.getElementById("root")
 );
 

@@ -3,11 +3,39 @@
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/bootstrap.scss";
 
+$primary: #f2af2d;
+$secondary: #6ec1e4;
+$tertiary: #cf4a93;
+$accent: #61ce70;
+$background: #000c1a;
+$dark: #000c1a;
+
+:root {
+  --primary: #{$primary};
+  --secondary: #{$secondary};
+  --tertiary: #{$tertiary};
+  --accent: #{$accent};
+  --background: #{$background};
+  --dark: #{$dark};
+
+  @media screen and (prefers-color-scheme: light) {
+    --material: #{$light};
+    --text: #{$dark};
+  }
+  @media screen and (prefers-color-scheme: dark) {
+    --material: #{$dark};
+    --text: #{rgba($light, 0.6)};
+  }
+}
+
 body {
   margin: 0;
+  overflow: hidden;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
+  color: var(--text);
+  background-color: var(--material);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -15,4 +43,14 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+
+  .admin-bar & {
+    height: calc(100vh - 32px);
+  }
 }

@@ -1,0 +1,15 @@
+@import "~bootstrap/scss/functions";
+@import "../../../../src/assets/styles/variables";
+@import "~bootstrap/scss/mixins";
+
+.container {
+  display: flex;
+  column-gap: 0.5em;
+  @include list-unstyled();
+
+  .item {
+    a {
+      color: var(--black);
+    }
+  }
+}

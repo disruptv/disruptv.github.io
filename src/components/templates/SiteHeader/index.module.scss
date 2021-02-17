@@ -1,0 +1,10 @@
+@import "~bootstrap/scss/functions";
+@import "../../../../src/assets/styles/variables";
+@import "~bootstrap/scss/mixins";
+
+.container {
+  justify-content: space-between;
+  @include make-row();
+  @include make-container();
+  @include make-container-max-widths();
+}

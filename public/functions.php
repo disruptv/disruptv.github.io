@@ -31,3 +31,50 @@ if( !function_exists('disruptv_setup') ) {
   }
 }
 add_action('after_setup_theme', 'disruptv_setup');
+
+add_action( 'rest_api_init', 'register_rest_images' );
+function register_rest_images() {
+  register_rest_field( 
+    array('post'), 
+    'featured_image_url', 
+    array(
+      'get_callback'    =>  'get_rest_featured_image',
+      'update_callback' =>  null,
+      'schema'          => null
+    ),
+  );
+}
+function get_rest_featured_image( $object, $field_name, $request ) {
+  if( $object['featured_media'] ) {
+    $img = wp_get_attachment_image_src( 
+      $object['featured_media'], 
+      'full',
+    );
+    return $img;
+  }
+
+  return false;
+}
+
+add_action( 'rest_api_init', 'register_rest_menus' );
+function register_rest_menus() {
+  register_rest_route( 'wp/v2', '/menus', array(
+    'methods' => 'GET',
+    'callback' => 'get_rest_menus',
+) );
+}
+function get_rest_menus( $request ) {
+  $menus = get_registered_nav_menus();
+  $locations = get_nav_menu_locations();
+
+  foreach( $menus as $slug => $name ) {
+    if (isset( $locations[$slug] )){
+      $object = get_term( $locations[$slug], 'nav_menu' );
+      $items = wp_get_nav_menu_items( $object );
+      $menus[$slug] = $items;
+    }
+  }
+  return $menus;
+}
+
+// TODO: Add custom logo to API

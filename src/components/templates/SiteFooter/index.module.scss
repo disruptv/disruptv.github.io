@@ -1,0 +1,8 @@
+@import "~bootstrap/scss/functions";
+@import "../../../../src/assets/styles/variables";
+@import "~bootstrap/scss/mixins";
+
+.container {
+  @include make-container();
+  @include make-container-max-widths();
+}

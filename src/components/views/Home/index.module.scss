@@ -1,0 +1,26 @@
+@import "~bootstrap/scss/functions";
+@import "../../../../src/assets/styles/variables";
+@import "~bootstrap/scss/mixins";
+
+.container {
+  display: flex;
+  flex: 1 1 100%;
+  align-items: center;
+  @include make-container();
+  @include make-container-max-widths();
+
+  .Section__intro {
+    h1 {
+      @include make-col(7);
+
+      small {
+        display: block;
+      }
+    }
+
+    p {
+      columns: 3;
+      @include make-col(12);
+    }
+  }
+}

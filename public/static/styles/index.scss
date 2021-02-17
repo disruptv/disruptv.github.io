@@ -8,30 +8,24 @@
 @import "Home";
 
 .wordpress {
-  display: flex;
-  height: 100vh;
-  overflow: hidden;
-}
+  :root {
+    --primary: #f2af2d;
+    --secondary: #6ec1e4;
+    --accent: #61ce70;
+    --accent2: #cf4a93;
+    --background: #000c1a;
+    --dark: #23282d;
 
-:root {
-  --primary: #f2af2d;
-  --secondary: #6ec1e4;
-  --accent: #61ce70;
-  --accent2: #cf4a93;
-  --background: #000c1a;
-  --dark: #23282d;
-
-  @media screen and (prefers-color-scheme: light) {
-    --material: var(--light);
-    --text: var(--dark);
+    @media screen and (prefers-color-scheme: light) {
+      --material: var(--light);
+      --text: var(--dark);
+    }
+    @media screen and (prefers-color-scheme: dark) {
+      --material: var(--dark);
+      --text: var(--light);
+    }
   }
-  @media screen and (prefers-color-scheme: dark) {
-    --material: var(--dark);
-    --text: var(--light);
-  }
-}
 
-.disruptv {
   position: relative;
   display: flex;
   flex-direction: column;
