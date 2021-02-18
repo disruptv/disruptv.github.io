@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import NavItems from "../../organisms/SiteNav";
 import styles from "./index.module.scss";
 
@@ -13,12 +14,12 @@ const mapPropsToState = (state: any, ownProps: any) => {
 const SiteHeader = (props: any) => {
   return (
     <header className={styles.container}>
-      <a href='/' className={styles.SiteLogo}>
+      <Link to='/' className={styles.SiteLogo}>
         Disruptv LLC
-      </a>
-      <nav>
+      </Link>
+      {/* <nav>
         <NavItems items={props.siteNav} />
-      </nav>
+      </nav> */}
     </header>
   );
 };

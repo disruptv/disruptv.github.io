@@ -15,6 +15,12 @@ import Home from "./components/views/Home";
 import Project from "./components/views/Project";
 
 store.dispatch(initialize);
+const vh = () => {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty("--vh", `${vh}px`);
+};
+window.addEventListener("load", vh);
+window.addEventListener("resize", vh);
 
 ReactDOM.render(
   <Provider store={store}>
@@ -25,7 +31,7 @@ ReactDOM.render(
           <Route exact strict path='/'>
             <Home />
           </Route>
-          <Route path='/'>
+          <Route path='/:id'>
             <Project />
           </Route>
         </Switch>

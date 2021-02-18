@@ -3,14 +3,14 @@
   <head>
     <?php wp_head(); ?>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/wp-content/themes/dist/static/media/favicon.ico" />
+    <link rel="icon" href="%PUBLIC_URL%/wp-content/themes/dist/static/media/disruptv-icon--onLight192.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
-      name="description"
-      content="Web site created using create-react-app"
+    name="description"
+      content="Disruptv, New York | Digital Strategy, Design, Development, Content & Management"
     />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/wp-content/themes/dist/static/media/logo192.png" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/wp-content/themes/dist/static/media/disruptv-icon--onDark192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/

@@ -4,11 +4,14 @@
 
 .container {
   display: flex;
-  column-gap: 1em;
   margin: 0;
   @include list-unstyled();
 
   .item {
+    &:not(:last-child) {
+      margin-right: 1em;
+    }
+
     a {
       color: var(--black);
     }

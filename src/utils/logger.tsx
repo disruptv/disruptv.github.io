@@ -5,10 +5,12 @@ const logger = winston.createLogger({
   transports: [
     new winston.transports.Console({
       format: winston.format.combine(
-        winston.format.prettyPrint({
-          depth: 2,
-          colorize: true,
-        })
+        winston.format.colorize({
+          all: true,
+        }),
+        winston.format.prettyPrint(),
+        winston.format.splat(),
+        winston.format.simple()
       ),
     }),
   ],
