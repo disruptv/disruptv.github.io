@@ -1,19 +1,23 @@
 import * as actions from "../actions";
 
 const initialState: any = {
-  home: {
-    title: `I work with startups and top companies on intentional, 
-    radical, innovative digital solutions.`,
-    excerpt: `I'm Aaron. Having careers in the arts and tech, my 
-    philosophy leverages connections between diverse experiences.</br> 
-    I draw from human-centered yet pragmatic technical skills to 
-    bring conscientiousness, creativity, and strategic thinking to all that I do.</br> 
-    Over the last decade, I've worked with startups and established companies alike
-    — taking ideas from mind to market.`,
-  },
+  pages: [],
   projects: [],
   menus: {
-    SiteNav: [],
+    SiteNav: [
+      {
+        url: "#",
+        title: "Projects",
+      },
+      {
+        url: "#",
+        title: "About",
+      },
+      {
+        url: "#",
+        title: "Resume",
+      },
+    ],
     SocialMenu: [
       {
         url: "https://linkedin.com/in/aaronsalley",
@@ -37,14 +41,18 @@ const initialState: any = {
       },
     ],
   },
+  settings: {
+    home: 0,
+  },
+  ready: false,
 };
 
 const reducer = (state = initialState, action: any): void => {
   switch (action.type) {
-    case actions.HOME:
+    case actions.PAGES:
       return {
         ...state,
-        home: action.payload,
+        pages: [...state.pages, ...action.payload],
       };
     case actions.PROJECTS:
       return {
@@ -66,6 +74,16 @@ const reducer = (state = initialState, action: any): void => {
           ...state.menus,
           SocialMenu: action.payload,
         },
+      };
+    case actions.SETTINGS:
+      return {
+        ...state,
+        settings: action.payload,
+      };
+    case actions.INITIALIZE:
+      return {
+        ...state,
+        ready: true,
       };
     default:
       return state;

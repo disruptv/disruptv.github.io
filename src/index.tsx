@@ -5,21 +5,28 @@ import reportWebVitals from "./reportWebVitals";
 
 import { Provider } from "react-redux";
 import store from "./store";
+import { initialize } from "./store/actions";
 
 import SiteFooter from "./components/templates/SiteFooter";
 import SiteHeader from "./components/templates/SiteHeader";
 
 import "./assets/styles/index.scss";
 import Home from "./components/views/Home";
+import Project from "./components/views/Project";
+
+store.dispatch(initialize);
 
 ReactDOM.render(
   <Provider store={store}>
     <React.Fragment>
       <Router>
-        {/* <SiteHeader></SiteHeader> */}
+        <SiteHeader></SiteHeader>
         <Switch>
-          <Route path='/'>
+          <Route exact strict path='/'>
             <Home />
+          </Route>
+          <Route path='/'>
+            <Project />
           </Route>
         </Switch>
         <SiteFooter></SiteFooter>

@@ -21,10 +21,12 @@ $dark: #000c1a;
   @media screen and (prefers-color-scheme: light) {
     --material: #{$light};
     --text: #{$dark};
+    --logo: url("../media/disruptv-logo--onLight.svg");
   }
   @media screen and (prefers-color-scheme: dark) {
     --material: #{$dark};
     --text: #{rgba($light, 0.6)};
+    --logo: url("../media/disruptv-logo--onDark.svg");
   }
 }
 
@@ -43,10 +45,6 @@ body {
   background-color: var(--material);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  &.admin-bar {
-    max-height: calc(100vh - 32px);
-  }
 }
 
 code {

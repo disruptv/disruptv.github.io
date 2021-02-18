@@ -1,40 +1,96 @@
+/* eslint-disable no-invalid-this */
+/* eslint-disable require-jsdoc */
 import React from "react";
 import { connect } from "react-redux";
+import stripHTML from "../../../utils/stripHTML";
 import ProjectSlate from "../../molecules/ProjectSlate";
 import styles from "./index.module.scss";
 
 const mapStateToProps = (state: any, ownProps: any) => {
-  const { projects, home } = state;
+  const { projects, pages, settings, ready } = state;
+
   return {
     projects,
-    home,
+    pages,
+    settings,
+    ready,
   };
 };
 
-const Home = (props: any) => {
-  const { title, excerpt } = props.home;
+class Home extends React.Component<any, any> {
+  constructor(props: any) {
+    super(props);
 
-  let intro = excerpt.split("</br>");
-  intro = intro.map((p: string, i: number) => {
-    return <p key={i}>{p}</p>;
-  });
+    this.state = {
+      id: 0,
+      title: `I work with startups and top companies on intentional, 
+      radical, innovative digital solutions.`,
+      excerpt: `I'm Aaron. Having careers in the arts and tech, my 
+      philosophy leverages connections between diverse experiences.</br> 
+      I draw from human-centered yet pragmatic technical skills to 
+      bring conscientiousness, creativity, and strategic thinking to all that I do.</br> 
+      Over the last decade, I've worked with startups and established companies alike
+      — taking ideas from mind to market.`,
+    };
+  }
 
-  const projects = props.projects.map((project: any, i: number) => {
-    return <ProjectSlate {...project} key={i} />;
-  });
+  componentDidUpdate(prevProps: any) {
+    if (prevProps.pages !== this.props.pages) {
+      this.selectHomeFromPages();
+    }
+  }
 
-  return (
-    <main className={styles.container}>
-      <section className={styles.Section__intro}>
-        <h1>
-          <small>Hey there,</small>
-          {title}
-        </h1>
-        <div className={styles.intro}>{intro}</div>
-      </section>
-      {/* <section className={styles.Section__showcase}>{projects}</section> */}
-    </main>
-  );
-};
+  selectHomeFromPages = () => {
+    const content = this.props.pages
+      .map((page: any) => {
+        if (
+          this.props.settings.home !== 0 &&
+          page.id === this.props.settings.home
+        ) {
+          return page;
+        }
+      })
+      .filter(Boolean)
+      .pop();
+
+    if (content) {
+      this.setState({
+        title: stripHTML(content.title.rendered),
+        excerpt: stripHTML(content.excerpt.rendered),
+      });
+    }
+
+    return false;
+  };
+
+  composeIntro = () => {
+    return this.state.excerpt.split("</br>").map((p: string, i: number) => {
+      return <p key={i}>{p}</p>;
+    });
+  };
+
+  composeProjects = () => {
+    return this.props.projects.map((project: any, i: number) => {
+      return <ProjectSlate {...project} key={i} />;
+    });
+  };
+
+  render() {
+    return (
+      <main className={styles.container}>
+        <section className={styles.Section__intro}>
+          <h1>
+            <small>Hey there,</small>
+            {this.state.title}
+          </h1>
+          <div className={styles.intro}>{<this.composeIntro />}</div>
+        </section>
+        <section className={styles.Section__showcase}>
+          {<this.composeProjects />}
+        </section>
+      </main>
+    );
+  }
+}
 
 export default connect(mapStateToProps)(Home);

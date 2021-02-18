@@ -3,8 +3,23 @@
 @import "~bootstrap/scss/mixins";
 
 .container {
+  align-items: center;
   justify-content: space-between;
+  margin-top: 2rem;
   @include make-row();
   @include make-container(0);
   @include make-container-max-widths();
+
+  .SiteLogo {
+    width: 7rem;
+    height: 3.5rem;
+    background-image: var(--logo);
+    background-repeat: no-repeat;
+    background-size: contain;
+    @include text-hide($ignore-warning: false);
+
+    &:hover {
+      transition: all 5s ease;
+    }
+  }
 }

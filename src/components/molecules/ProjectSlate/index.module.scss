@@ -3,11 +3,20 @@
 @import "~bootstrap/scss/mixins";
 
 .container {
+  position: relative;
   height: 100vh;
   @include make-col(12);
 
   .title {
     @include make-container();
     @include make-container-max-widths();
+  }
+
+  a {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
   }
 }

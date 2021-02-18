@@ -4,7 +4,8 @@
 
 .container {
   display: flex;
-  column-gap: 0.5em;
+  column-gap: 3em;
+  margin: 0;
   @include list-unstyled();
 
   .item {

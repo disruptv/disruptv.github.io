@@ -16,6 +16,9 @@ const SiteFooter = (props: any) => {
       <menu className={styles.SocialMenu}>
         <SocialMenu items={props.socialMenu} />
       </menu>
+      <small className={styles.copyright}>
+        © Copyright Disruptv LLC {new Date().getFullYear()}
+      </small>
     </footer>
   );
 };

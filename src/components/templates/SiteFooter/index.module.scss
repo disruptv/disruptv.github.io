@@ -3,11 +3,18 @@
 @import "~bootstrap/scss/mixins";
 
 .container {
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
   @include make-row();
   @include make-container(0);
   @include make-container-max-widths();
 
   .SocialMenu {
     padding: 0;
+  }
+
+  .copyright {
+    opacity: 0.3;
   }
 }

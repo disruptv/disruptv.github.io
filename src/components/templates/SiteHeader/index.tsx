@@ -14,7 +14,7 @@ const SiteHeader = (props: any) => {
   return (
     <header className={styles.container}>
       <a href='/' className={styles.SiteLogo}>
-        Image
+        Disruptv LLC
       </a>
       <nav>
         <NavItems items={props.siteNav} />

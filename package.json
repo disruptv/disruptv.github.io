@@ -3,6 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "http://disruptv.github.io",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d portfolio"
+  },
   "dependencies": {
     "@disruptv/react-scripts": "^1.4.1",
     "@testing-library/jest-dom": "^5.11.4",
@@ -27,7 +35,8 @@
     "stylelint-config-recess-order": "^2.3.0",
     "stylelint-order": "^4.1.0",
     "typescript": "^4.1.2",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "@types/react-redux": "^7.1.16",
@@ -41,14 +50,6 @@
     "redux-devtools-extension": "^2.13.8",
     "stylelint-config-prettier": "^8.0.2",
     "tslint-config-prettier": "^1.18.0"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "yarn build",
-    "deploy": "gh-pages -d portfolio"
   },
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",
