@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactComponentElement } from "react";
 import styles from "./index.module.scss";
 
 const SocialMenuItem = (props: any) => {
@@ -21,7 +21,7 @@ const SocialMenuItem = (props: any) => {
   );
 };
 
-const SocialMenu = (props: any) => {
+const SocialMenu = (props: any): ReactComponentElement<"ul"> => {
   const items = props.items.map((item: any, i: number) => {
     return <SocialMenuItem {...item} key={i} />;
   });

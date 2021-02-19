@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactComponentElement } from "react";
 import styles from "./index.module.scss";
 
 const SiteNavItem = (props: any) => {
@@ -17,7 +17,7 @@ const SiteNavItem = (props: any) => {
   );
 };
 
-const SiteNav = (props: any) => {
+const SiteNav = (props: any): ReactComponentElement<"ul"> => {
   const items = props.items.map((item: any, i: number) => {
     return <SiteNavItem {...item} key={i} />;
   });

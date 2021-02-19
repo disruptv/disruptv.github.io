@@ -32,6 +32,10 @@ class Home extends React.Component<any, any> {
     };
   }
 
+  componentDidMount() {
+    this.selectHomeFromPages();
+  }
+
   componentDidUpdate(prevProps: any) {
     if (prevProps.pages !== this.props.pages) {
       this.selectHomeFromPages();
@@ -40,16 +44,10 @@ class Home extends React.Component<any, any> {
 
   selectHomeFromPages = () => {
     const content = this.props.pages
-      .map((page: any) => {
-        if (
-          this.props.settings.home !== 0 &&
-          page.id === this.props.settings.home
-        ) {
-          return page;
-        }
-        return false;
-      })
-      .filter(Boolean)
+      .filter(
+        (page: any) =>
+          this.props.settings.home !== 0 && page.id === this.props.settings.home
+      )
       .pop();
 
     if (content) {

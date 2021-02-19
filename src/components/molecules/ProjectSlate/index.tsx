@@ -1,8 +1,8 @@
-import React from "react";
+import React, { ReactComponentElement } from "react";
 import { Link } from "react-router-dom";
 import styles from "./index.module.scss";
 
-const ProjectSlate = (props: any) => {
+const ProjectSlate = (props: any): ReactComponentElement<"article"> => {
   const { title, slug } = props;
 
   return (
