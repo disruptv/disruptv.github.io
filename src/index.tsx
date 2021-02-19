@@ -31,9 +31,10 @@ ReactDOM.render(
           <Route exact strict path='/'>
             <Home />
           </Route>
-          <Route path='/:id'>
+          <Route path='/project/:id'>
             <Project />
           </Route>
+          <Route path='/:id'></Route>
         </Switch>
         <SiteFooter></SiteFooter>
       </Router>

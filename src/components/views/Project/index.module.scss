@@ -1,0 +1,85 @@
+@import "~bootstrap/scss/functions";
+@import "../../../../src/assets/styles/variables";
+@import "~bootstrap/scss/mixins";
+
+.container {
+  @include make-container(0);
+
+  .slate {
+    position: relative;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    padding-bottom: 5em;
+    margin: 2em 0;
+    background-color: rgba($black, 0.18);
+    @include make-row();
+
+    @media (min-height: map-get($map: $container-max-widths, $key: md)) {
+      min-height: calc(var(--vh, 1vh) * 100);
+    }
+    @media (min-height: map-get($map: $container-max-widths, $key: lg)) {
+      min-height: calc(var(--vh, 1vh) * 75);
+    }
+    @media (min-height: map-get($map: $container-max-widths, $key: xl)) {
+      min-height: calc(var(--vh, 1vh) * 50);
+    }
+
+    .client {
+      display: flex;
+      flex: 1 0 100%;
+      align-items: center;
+      @include make-container();
+      @include make-container-max-widths();
+
+      @media (max-height: map-get($map: $container-max-widths, $key: lg)) {
+        min-height: calc(var(--vh, 1vh) * 25);
+      }
+    }
+
+    .title {
+      align-self: flex-end;
+      margin-bottom: 2em;
+      @include make-container();
+      @include make-container-max-widths();
+    }
+
+    .excerpt {
+      position: relative;
+      align-self: flex-end;
+      @include make-container();
+      @include make-container-max-widths();
+    }
+
+    .details {
+      @include make-row();
+      @include make-container();
+      @include make-container-max-widths();
+    }
+
+    .skills {
+      @include make-col-ready();
+      @include make-col(4);
+      @include list-unstyled();
+    }
+
+    .platforms {
+      @include make-col-ready();
+      @include make-col(4);
+      @include list-unstyled();
+    }
+
+    .date {
+      @include make-col-ready();
+      @include make-col(4);
+    }
+  }
+
+  .content {
+    position: relative;
+    padding: 2em 0;
+    margin: 2em 0;
+
+    @include make-container();
+    @include make-container-max-widths();
+  }
+}

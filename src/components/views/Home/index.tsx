@@ -1,5 +1,3 @@
-/* eslint-disable no-invalid-this */
-/* eslint-disable require-jsdoc */
 import React from "react";
 import { connect } from "react-redux";
 import stripHTML from "../../../utils/stripHTML";
@@ -49,6 +47,7 @@ class Home extends React.Component<any, any> {
         ) {
           return page;
         }
+        return false;
       })
       .filter(Boolean)
       .pop();
@@ -85,9 +84,9 @@ class Home extends React.Component<any, any> {
           </h1>
           <div className={styles.intro}>{<this.composeIntro />}</div>
         </section>
-        {/* <section className={styles.Section__showcase}>
+        <section className={styles.Section__showcase}>
           {<this.composeProjects />}
-        </section> */}
+        </section>
       </main>
     );
   }

@@ -4,12 +4,17 @@
 
 .container {
   position: relative;
-  height: 100vh;
-  @include make-col(12);
+  height: calc(var(--vh, 1vh) * 100);
+  @include make-row(0);
+
+  .client {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 
   .title {
-    @include make-container();
-    @include make-container-max-widths();
+    @include make-col(12);
   }
 
   a {

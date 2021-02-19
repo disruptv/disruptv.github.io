@@ -8,7 +8,7 @@
   margin-bottom: 1rem;
 
   @include make-row();
-  @include make-container(0);
+  @include make-container();
   @include make-container-max-widths();
 
   .SocialMenu {

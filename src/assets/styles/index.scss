@@ -37,7 +37,7 @@ html {
 body {
   height: calc(var(--vh, 1vh) * 100);
   margin: 0;
-  overflow: scroll;
+  overflow-y: overlay;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -45,6 +45,33 @@ body {
   background-color: var(--material);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  // &::-webkit-scrollbar {
+  //   width: 0.5em;
+  // }
+  // &:hover::-webkit-scrollbar {
+  //   width: 0.5em;
+
+  //   &--track {
+  //     background: var(--material);
+  //   }
+
+  //   /* Handle */
+  //   &-thumb {
+  //     transition: background-color 25s ease;
+
+  //     @media screen and (prefers-color-scheme: light) {
+  //       background-color: var(--dark);
+  //     }
+  //     @media screen and (prefers-color-scheme: dark) {
+  //       background-color: var(--light);
+  //     }
+
+  //     &:hover {
+  //       background-color: var(--primary);
+  //     }
+  //   }
+  // }
 }
 
 code {

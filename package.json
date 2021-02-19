@@ -68,7 +68,8 @@
       "react-app/jest"
     ],
     "rules": {
-      "require-jsdoc": 0
+      "require-jsdoc": 0,
+      "no-invalid-this": 0
     }
   },
   "stylelint": {

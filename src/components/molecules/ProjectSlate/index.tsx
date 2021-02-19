@@ -8,7 +8,7 @@ const ProjectSlate = (props: any) => {
   return (
     <article className={styles.container}>
       <h2 className={styles.title}>{title.rendered}</h2>
-      <Link to={slug}></Link>
+      <Link to={`project/${slug}`}></Link>
     </article>
   );
 };

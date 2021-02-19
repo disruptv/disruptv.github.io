@@ -4,11 +4,18 @@
 
 .container {
   display: flex;
-  column-gap: 3em;
   margin: 0;
   @include list-unstyled();
 
+  @include media-breakpoint-down(sm) {
+    display: none;
+  }
+
   .item {
+    &:not(:last-child) {
+      margin-right: 3em;
+    }
+
     a {
       color: var(--black);
     }

@@ -11,7 +11,7 @@ type ThunkAction<ReturnType = void> = ReduxThunkAction<
 >;
 
 const $http = axios.create({
-  baseURL: "?rest_route=/wp/v2/",
+  baseURL: process.env.REACT_APP_PROXY + "/wp/v2/",
 });
 
 export const PAGES = "PAGES";
@@ -29,7 +29,7 @@ export const getPages = (): ThunkAction => {
         payload,
       });
     } catch (error) {
-      logger.error(error.response.data);
+      logger.error(error.response);
     }
   };
 };
