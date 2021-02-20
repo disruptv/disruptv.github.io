@@ -1,3 +1,4 @@
+import { AnyAction } from "redux";
 import * as actions from "../actions";
 
 const initialState: any = {
@@ -6,60 +7,37 @@ const initialState: any = {
   menus: {
     SiteNav: [
       {
-        url: "#",
-        title: "Projects",
-      },
-      {
-        url: "#",
-        title: "About",
-      },
-      {
-        url: "#",
-        title: "Resume",
+        url: "",
+        title: "",
       },
     ],
     SocialMenu: [
       {
-        url: "https://linkedin.com/in/aaronsalley",
-        title: "LinkedIn",
-      },
-      {
-        url: "https://github.com/aaronsalley",
-        title: "Github",
-      },
-      {
-        url: "https://www.figma.com/@disruptv",
-        title: "Figma",
-      },
-      {
-        url: "https://www.instagram.com/aaronsalleyhim/",
-        title: "Instagram",
-      },
-      {
-        url: "https://twitter.com/aaronsalley",
-        title: "Twitter",
+        url: "",
+        title: "",
       },
     ],
   },
   settings: {
-    home: 0,
+    homeId: 0,
+    projectCatId: 0,
   },
   ready: false,
 };
 
-const reducer = (state = initialState, action: any): void => {
+const reducer = (state = initialState, action: AnyAction): void => {
   switch (action.type) {
-    case actions.PAGES:
+    case actions.GET_PAGES:
       return {
         ...state,
         pages: [...state.pages, ...action.payload],
       };
-    case actions.PROJECTS:
+    case actions.GET_PROJECTS:
       return {
         ...state,
         projects: action.payload,
       };
-    case actions.SITENAV:
+    case actions.GET_SITENAV:
       return {
         ...state,
         menus: {
@@ -67,7 +45,7 @@ const reducer = (state = initialState, action: any): void => {
           SiteNav: action.payload,
         },
       };
-    case actions.SOCIALMENU:
+    case actions.GET_SOCIALMENU:
       return {
         ...state,
         menus: {
@@ -75,12 +53,27 @@ const reducer = (state = initialState, action: any): void => {
           SocialMenu: action.payload,
         },
       };
-    case actions.SETTINGS:
+    case actions.GET_HOME_ID:
       return {
         ...state,
-        settings: action.payload,
+        settings: {
+          ...state.settings,
+          homeId: action.payload,
+        },
       };
-    case actions.INITIALIZE:
+    case actions.GET_PROJECT_CAT:
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          projectCatId: action.payload,
+        },
+      };
+    case actions.GET_SETTINGS:
+      return {
+        ...state,
+      };
+    case actions.IS_INITIALIZED:
       return {
         ...state,
         ready: true,

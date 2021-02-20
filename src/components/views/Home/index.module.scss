@@ -8,7 +8,6 @@
   align-items: center;
   justify-content: center;
   @include make-row();
-  @include make-container(0);
 
   .Section__intro {
     display: flex;
@@ -61,7 +60,6 @@
   }
 
   .Section__showcase {
-    display: flex;
-    flex-wrap: wrap;
+    @include make-container();
   }
 }

@@ -6,6 +6,7 @@
   position: relative;
   height: calc(var(--vh, 1vh) * 100);
   @include make-row(0);
+  @include make-container();
 
   .client {
     position: absolute;
@@ -14,7 +15,8 @@
   }
 
   .title {
-    @include make-col(12);
+    // @include make-col-ready();
+    // @include make-col(12);
   }
 
   a {

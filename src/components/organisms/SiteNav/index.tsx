@@ -1,4 +1,5 @@
 import React, { ReactComponentElement } from "react";
+import { NavLink } from "react-router-dom";
 import styles from "./index.module.scss";
 
 const SiteNavItem = (props: any) => {
@@ -12,7 +13,7 @@ const SiteNavItem = (props: any) => {
         return styles[className];
       })}
     >
-      <a href={url}>{title}</a>
+      <NavLink to={`/${title.toLowerCase()}`}>{title}</NavLink>
     </li>
   );
 };

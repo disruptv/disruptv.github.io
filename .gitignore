@@ -12,6 +12,7 @@
 /coverage
 
 # production
+*.zip
 /build
 /portfolio
 

@@ -54,23 +54,16 @@
       @include make-row();
       @include make-container();
       @include make-container-max-widths();
+      @include row-cols(3);
+
+      @include media-breakpoint-down(sm) {
+        display: block;
+      }
     }
 
-    .skills {
-      @include make-col-ready();
-      @include make-col(4);
-      @include list-unstyled();
-    }
-
+    .skills,
     .platforms {
-      @include make-col-ready();
-      @include make-col(4);
       @include list-unstyled();
-    }
-
-    .date {
-      @include make-col-ready();
-      @include make-col(4);
     }
   }
 
