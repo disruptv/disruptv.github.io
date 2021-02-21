@@ -2,6 +2,8 @@
 @import "../../../../src/assets/styles/variables";
 @import "~bootstrap/scss/mixins";
 
+$dark: #000c1a;
+
 .container {
   @include make-container(0);
 
@@ -11,7 +13,12 @@
     flex-wrap: nowrap;
     padding-bottom: 5em;
     margin: 2em 0;
-    background-color: rgba($black, 0.18);
+    background-color: rgba($dark, 0.8);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    background-blend-mode: multiply;
     @include make-row();
 
     @media (min-height: map-get($map: $container-max-widths, $key: md)) {
@@ -24,7 +31,36 @@
       min-height: calc(var(--vh, 1vh) * 50);
     }
 
+    &::before,
+    &::after {
+      position: absolute;
+      z-index: 1;
+      content: "";
+      @media screen and (prefers-color-scheme: light) {
+        @include gradient-y(var(--light), transparent);
+      }
+      @media screen and (prefers-color-scheme: dark) {
+        @include gradient-y(var(--dark), transparent);
+      }
+    }
+
+    &::before {
+      top: -1px;
+      right: 0;
+      bottom: 85%;
+      left: 0;
+    }
+
+    &::after {
+      top: 85%;
+      right: 0;
+      bottom: -1px;
+      left: 0;
+      transform: scaleY(-1);
+    }
+
     .client {
+      z-index: 2;
       display: flex;
       flex: 1 0 100%;
       align-items: center;
@@ -37,6 +73,7 @@
     }
 
     .title {
+      z-index: 2;
       align-self: flex-end;
       margin-bottom: 2em;
       @include make-container();
@@ -45,12 +82,14 @@
 
     .excerpt {
       position: relative;
+      z-index: 2;
       align-self: flex-end;
       @include make-container();
       @include make-container-max-widths();
     }
 
     .details {
+      z-index: 2;
       @include make-row();
       @include make-container();
       @include make-container-max-widths();

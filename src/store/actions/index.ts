@@ -92,10 +92,10 @@ export const getPages = (): ThunkAction => {
   };
 };
 
-const getPosts = async (catId = "", tags = "", sticky = false) => {
+const getPosts = async (catId = "", tags = "") => {
   try {
     const response = await $http.get(
-      `/posts?categories=${catId}&tags=${tags}&sticky=${sticky}&per_page=100`
+      `/posts?categories=${catId}&tags=${tags}&per_page=100`
     );
 
     return response.data;

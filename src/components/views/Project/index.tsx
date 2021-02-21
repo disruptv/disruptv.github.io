@@ -75,6 +75,7 @@ class Project extends React.Component<any, any> {
         content: String(Project.content.rendered),
         skills: this.selectNames(skills),
         platforms: this.selectNames(platforms),
+        image: Project.featured_image_url[0],
       });
     }
 
@@ -100,7 +101,10 @@ class Project extends React.Component<any, any> {
   render() {
     return (
       <article className={styles.container}>
-        <header className={styles.slate}>
+        <header
+          className={styles.slate}
+          style={{ backgroundImage: `url(${this.state.image}` }}
+        >
           <h1 className={styles.client}>{this.state.client}</h1>
           <h2 className={styles.title}>{this.state.title}</h2>
           <p className={styles.excerpt}>{this.state.excerpt}</p>

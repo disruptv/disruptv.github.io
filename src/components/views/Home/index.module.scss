@@ -14,7 +14,7 @@
     flex-wrap: wrap;
     align-content: center;
     height: 100%;
-    min-height: calc(var(--vh, 1vh) * 80);
+    min-height: calc(var(--vh, 1vh) * 100 - 56px);
     @include make-col(12);
     @include make-container-max-widths();
 
@@ -60,6 +60,6 @@
   }
 
   .Section__showcase {
-    @include make-container();
+    @include make-container(0);
   }
 }

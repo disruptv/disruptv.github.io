@@ -69,7 +69,7 @@ class Home extends React.Component<any, any> {
 
   composeProjects = () => {
     return this.props.projects.map((project: any, i: number) => {
-      return <ProjectSlate {...project} key={i} />;
+      return project.sticky ? <ProjectSlate {...project} key={i} /> : false;
     });
   };
 

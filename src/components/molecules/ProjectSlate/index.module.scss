@@ -4,9 +4,44 @@
 
 .container {
   position: relative;
+  align-content: center;
+  justify-content: center;
   height: calc(var(--vh, 1vh) * 100);
-  @include make-row(0);
-  @include make-container();
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  background-blend-mode: multiply;
+  @include make-row();
+  @include make-container(0);
+
+  &::before,
+  &::after {
+    position: absolute;
+    z-index: 1;
+    content: "";
+    @media screen and (prefers-color-scheme: light) {
+      @include gradient-y(var(--light), transparent);
+    }
+    @media screen and (prefers-color-scheme: dark) {
+      @include gradient-y(var(--dark), transparent);
+    }
+  }
+
+  &:first-of-type::before {
+    top: -1px;
+    right: 0;
+    bottom: 65%;
+    left: 0;
+  }
+
+  &:last-of-type::after {
+    top: 65%;
+    right: 0;
+    bottom: -1px;
+    left: 0;
+    transform: scaleY(-1);
+  }
 
   .client {
     position: absolute;
