@@ -13,6 +13,7 @@ $dark: #000c1a;
     flex-wrap: nowrap;
     padding-bottom: 5em;
     margin: 2em 0;
+    color: $light !important;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
@@ -29,7 +30,7 @@ $dark: #000c1a;
       min-height: calc(var(--vh, 1vh) * 50);
     }
     @media screen and (prefers-color-scheme: light) {
-      background-color: rgba($light, 0.5);
+      background-color: rgba($dark, 0.2);
       background-blend-mode: soft-light;
     }
     @media screen and (prefers-color-scheme: dark) {
@@ -80,16 +81,13 @@ $dark: #000c1a;
 
     .title {
       z-index: 2;
-      align-self: flex-end;
       margin-bottom: 2em;
       @include make-container();
       @include make-container-max-widths();
     }
 
     .excerpt {
-      position: relative;
       z-index: 2;
-      align-self: flex-end;
       @include make-container();
       @include make-container-max-widths();
     }

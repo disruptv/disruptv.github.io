@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import sleep from "../../../utils/sleep";
 import SocialMenu from "../../organisms/SocialMenu";
 import styles from "./index.module.scss";
 
 const mapPropsToState = (state: any, ownProps: any) => {
   const { menus, ready } = state;
+
   return {
     socialMenu: menus.SocialMenu,
     ready,
@@ -79,4 +81,4 @@ const SiteFooter = (props: any) => {
   );
 };
 
-export default connect(mapPropsToState)(SiteFooter);
+export default withRouter(connect(mapPropsToState)(SiteFooter));

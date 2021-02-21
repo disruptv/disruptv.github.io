@@ -12,30 +12,34 @@
   @include make-container();
   @include make-container-max-widths();
 
-  &.inTransit {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    opacity: 0;
-  }
-
-  &.docked {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    opacity: 1;
-    @media screen and (prefers-color-scheme: light) {
-      background: var(--light);
-    }
-    @media screen and (prefers-color-scheme: dark) {
-      background: var(--dark);
-    }
-
-    &.inTransit--start {
+  main[class^="Home_container"] + & {
+    &.inTransit {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      left: 0;
       opacity: 0;
-      transition: none;
+    }
+
+    &.docked {
+      right: 0;
+      bottom: 0;
+      left: 0;
+      opacity: 1;
+      @media screen and (prefers-color-scheme: light) {
+        // background: var(--light);
+      }
+      @media screen and (prefers-color-scheme: dark) {
+        background: var(--dark);
+      }
+      @include media-breakpoint-up(md) {
+        position: fixed;
+      }
+
+      &.inTransit--start {
+        opacity: 0;
+        transition: none;
+      }
     }
   }
 
