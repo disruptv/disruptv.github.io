@@ -13,12 +13,10 @@ $dark: #000c1a;
     flex-wrap: nowrap;
     padding-bottom: 5em;
     margin: 2em 0;
-    background-color: rgba($dark, 0.8);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
     background-size: cover;
-    background-blend-mode: multiply;
     @include make-row();
 
     @media (min-height: map-get($map: $container-max-widths, $key: md)) {
@@ -30,6 +28,14 @@ $dark: #000c1a;
     @media (min-height: map-get($map: $container-max-widths, $key: xl)) {
       min-height: calc(var(--vh, 1vh) * 50);
     }
+    @media screen and (prefers-color-scheme: light) {
+      background-color: rgba($light, 0.5);
+      background-blend-mode: soft-light;
+    }
+    @media screen and (prefers-color-scheme: dark) {
+      background-color: rgba($dark, 0.8);
+      background-blend-mode: multiply;
+    }
 
     &::before,
     &::after {
@@ -37,10 +43,10 @@ $dark: #000c1a;
       z-index: 1;
       content: "";
       @media screen and (prefers-color-scheme: light) {
-        @include gradient-y(var(--light), transparent);
+        @include gradient-y($light, rgba($light, 0));
       }
       @media screen and (prefers-color-scheme: dark) {
-        @include gradient-y(var(--dark), transparent);
+        @include gradient-y(var(--dark), rgba($dark, 0));
       }
     }
 

@@ -13,7 +13,7 @@
   background-size: cover;
   background-blend-mode: multiply;
   @include make-row();
-  @include make-container(0);
+  @include make-container();
 
   &::before,
   &::after {
