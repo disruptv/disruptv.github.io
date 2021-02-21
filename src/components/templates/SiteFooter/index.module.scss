@@ -6,10 +6,32 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 1rem;
-
+  opacity: 1;
+  transition: all var(--timing) ease-in-out;
   @include make-row();
   @include make-container();
   @include make-container-max-widths();
+
+  &.inTransit {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+  }
+
+  &.docked {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 1;
+
+    &.inTransit--start {
+      opacity: 0;
+      transition: none;
+    }
+  }
 
   .SocialMenu {
     padding: 0;

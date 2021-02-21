@@ -17,6 +17,7 @@ $dark: #000c1a;
   --accent: #{$accent};
   --background: #{$background};
   --dark: #{$dark};
+  --timing: 1s;
 
   @media screen and (prefers-color-scheme: light) {
     --material: #{$light};
@@ -25,7 +26,7 @@ $dark: #000c1a;
   }
   @media screen and (prefers-color-scheme: dark) {
     --material: #{$dark};
-    --text: #{rgba($light, 0.6)};
+    --text: #{rgba($light, 0.8)};
     --logo: url("../media/disruptv-logo--onDark.svg");
   }
 }

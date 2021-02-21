@@ -213,11 +213,11 @@ export const initialize = async (
   try {
     await Promise.all([
       dispatch(getSettings),
-      dispatch(getProjectPosts()),
       dispatch(getSiteNav()),
       dispatch(getSocialMenu()),
-      dispatch(getPages()),
     ]);
+    await dispatch(getProjectPosts());
+    await dispatch(getPages());
 
     return dispatch({
       type: IS_INITIALIZED,

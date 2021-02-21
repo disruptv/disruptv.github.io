@@ -1,6 +1,5 @@
-import React, { Dispatch } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import { getProjectPosts } from "../../../store/actions";
 import htmlDecode from "../../../utils/htmlDecode";
 import ProjectSlate from "../../molecules/ProjectSlate";
 import styles from "./index.module.scss";
@@ -13,12 +12,6 @@ const mapStateToProps = (state: any, ownProps: any) => {
     pages,
     settings,
     ready,
-  };
-};
-
-const mapDispatchToProps = (dispatch: Dispatch<any>) => {
-  return {
-    getProjects: () => dispatch(getProjectPosts()),
   };
 };
 
@@ -40,15 +33,10 @@ class Home extends React.Component<any, any> {
   }
 
   componentDidMount() {
-    this.props.getProjects();
     this.selectHomeFromPages();
   }
 
   componentDidUpdate(prevProps: any) {
-    if (prevProps.settings.projectCatId !== this.props.settings.projectCatId) {
-      this.props.getProjects();
-    }
-
     if (prevProps.pages !== this.props.pages) {
       this.selectHomeFromPages();
     }
@@ -103,4 +91,4 @@ class Home extends React.Component<any, any> {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps)(Home);

@@ -3,7 +3,7 @@ import styles from "./index.module.scss";
 
 const SocialMenuItem = (props: any) => {
   let { classes = [], url, title } = props;
-  classes.push("item");
+  classes.includes("item") ? classes.push() : classes.push("item");
   classes = classes.filter(Boolean);
 
   const icon = title.toLowerCase();
