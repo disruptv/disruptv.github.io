@@ -97,10 +97,10 @@ $dark: #000c1a;
       @include make-row();
       @include make-container();
       @include make-container-max-widths();
-      @include row-cols(3);
+      @include row-cols(1);
 
-      @include media-breakpoint-down(sm) {
-        display: block;
+      @include media-breakpoint-up(md) {
+        @include row-cols(3);
       }
     }
 
@@ -114,8 +114,11 @@ $dark: #000c1a;
     position: relative;
     padding: 2em 0;
     margin: 2em 0;
-
     @include make-container();
     @include make-container-max-widths();
+
+    img {
+      height: auto;
+    }
   }
 }

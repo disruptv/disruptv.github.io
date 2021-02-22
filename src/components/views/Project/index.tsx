@@ -95,7 +95,7 @@ class Project extends React.Component<any, any> {
 
   ComposeLists = (props: any) => {
     return props.items.map((item: any, i: number) => {
-      return <li key={i}>{item}</li>;
+      return <li key={i}>{htmlDecode(item)}</li>;
     });
   };
 
