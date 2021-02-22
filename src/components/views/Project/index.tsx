@@ -6,6 +6,7 @@ import {
   getProjectPosts,
   getTagsByID,
 } from "../../../store/actions";
+import browser from "../../../utils/browserDetection";
 import htmlDecode from "../../../utils/htmlDecode";
 import styles from "./index.module.scss";
 
@@ -103,7 +104,11 @@ class Project extends React.Component<any, any> {
       <article className={styles.container}>
         <header
           className={styles.slate}
-          style={{ backgroundImage: `url(${this.state.image}` }}
+          style={{
+            backgroundImage: `url(${this.state.image}`,
+            backgroundAttachment:
+              browser === "Apple Safari" ? "inherit" : "fixed",
+          }}
         >
           <h1 className={styles.client}>{this.state.client}</h1>
           <h2 className={styles.title}>{this.state.title}</h2>
