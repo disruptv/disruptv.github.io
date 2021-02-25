@@ -17,6 +17,7 @@ $tertiary: #cf4a93;
 $accent: #61ce70;
 $background: #000c1a;
 $dark: #000c1a;
+$gray: lighten($black, 80%);
 
 :root {
   --primary: #{$primary};
@@ -25,6 +26,7 @@ $dark: #000c1a;
   --accent: #{$accent};
   --background: #{$background};
   --dark: #{$dark};
+  --gray: #{$gray};
   --timing: 1s;
 
   @media screen and (prefers-color-scheme: light) {

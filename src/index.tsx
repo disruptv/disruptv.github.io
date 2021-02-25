@@ -13,6 +13,7 @@ import SiteHeader from "./components/templates/SiteHeader";
 import "./assets/styles/index.scss";
 import Home from "./components/views/Home";
 import Project from "./components/views/Project";
+import Resume from "./components/views/Resume";
 
 store.dispatch(initialize);
 const vh = () => {
@@ -33,6 +34,9 @@ ReactDOM.render(
           </Route>
           <Route path='/project/:id'>
             <Project />
+          </Route>
+          <Route path='/resume'>
+            <Resume />
           </Route>
           <Route path='/:id'></Route>
         </Switch>

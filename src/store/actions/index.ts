@@ -92,11 +92,24 @@ export const getPages = (): ThunkAction => {
   };
 };
 
-const getPosts = async (catId = "", tags = "") => {
+const getPosts = async (
+  catId: string | number | null = "",
+  tags: string[] | string | null = ""
+): Promise<any> => {
   try {
-    const response = await $http.get(
-      `/posts?categories=${catId}&tags=${tags}&per_page=100`
-    );
+    let response;
+
+    if (catId === "" && tags === "") {
+      response = await $http.get(`/posts?per_page=100`);
+    } else if (catId === "" && tags !== "") {
+      response = await $http.get(`/posts?tags=${tags}&per_page=100`);
+    } else if (catId !== "" && tags === "") {
+      response = await $http.get(`/posts?categories=${catId}&per_page=100`);
+    } else {
+      response = await $http.get(
+        `/posts?categories=${catId}&tags=${tags}&per_page=100`
+      );
+    }
 
     return response.data;
   } catch (error) {
@@ -110,7 +123,8 @@ export const getProjectPosts = (): ThunkAction => {
     getState: any
   ): Promise<AnyAction | void> => {
     try {
-      const projects = await getPosts(getState().settings.projectCatId);
+      const { projectCatId } = getState().settings;
+      const projects = await getPosts(projectCatId);
 
       return dispatch({
         type: GET_PROJECTS,
@@ -147,11 +161,15 @@ export const getTagsByID = async (
   ids: string | string[] = []
 ): Promise<any[] | void> => {
   try {
+    let response;
+
     if (ids.length !== 0) {
-      const response = await $http.get(`/tags?include=${ids}`);
-      return response.data;
+      response = await $http.get(`/tags?include=${ids}`);
+    } else {
+      response = await $http.get(`/tags`);
     }
-    return;
+
+    return response.data;
   } catch (error) {
     console.error(error);
   }
@@ -216,8 +234,6 @@ export const initialize = async (
       dispatch(getSiteNav()),
       dispatch(getSocialMenu()),
     ]);
-    await dispatch(getProjectPosts());
-    await dispatch(getPages());
 
     return dispatch({
       type: IS_INITIALIZED,

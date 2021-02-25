@@ -19,7 +19,7 @@ const mapStateToProps = (state: any, ownProps: any) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) => {
+const mapDispatchToProps = (dispatch: Dispatch<any>, ownProps: any) => {
   return {
     getProjects: () => dispatch(getProjectPosts()),
   };
@@ -94,9 +94,14 @@ class Project extends React.Component<any, any> {
   };
 
   ComposeLists = (props: any) => {
-    return props.items.map((item: any, i: number) => {
-      return <li key={i}>{htmlDecode(item)}</li>;
-    });
+    if (props.items) {
+      const items = props.items.map((item: any, i: number) => {
+        return <li key={i}>{htmlDecode(item)}</li>;
+      });
+
+      return <ul>{items}</ul>;
+    }
+    return null;
   };
 
   render() {

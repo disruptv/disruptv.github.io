@@ -1,0 +1,114 @@
+@import "~bootstrap/scss/functions";
+@import "../../../../src/assets/styles/variables";
+@import "~bootstrap/scss/mixins";
+
+.document {
+  @include make-container;
+  @include make-container-max-widths();
+
+  & > div {
+    @include make-row();
+  }
+}
+
+.contacts {
+  @include list-unstyled();
+}
+
+.jobs {
+  @include make-col-ready();
+  @include make-col(9);
+}
+
+.about {
+  @include make-col-ready();
+  @include make-col-auto();
+}
+
+article.job,
+article.education {
+  position: relative;
+
+  .company,
+  .school {
+    display: inline;
+  }
+  .location {
+    display: inline;
+  }
+  .roleTitle,
+  .degree {
+    display: inline;
+  }
+  .summary {
+    display: inline;
+  }
+
+  .dates {
+    display: inline;
+
+    &::before {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      z-index: 5;
+      display: block;
+      width: 0.75rem;
+      height: 0.75rem;
+      content: "";
+      background-color: var(--gray);
+      border-radius: 100%;
+      transform: translate(-($grid-gutter-width - 16px * 0.25/2), -50%);
+    }
+
+    &::after {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      display: block;
+      width: 1rem;
+      height: 1rem;
+      content: "";
+      background-color: var(--gray);
+      border: 2.5px solid $light;
+      border-radius: 100%;
+      transform: translate(-$grid-gutter-width, -50%);
+    }
+  }
+
+  &.job {
+    margin-left: $grid-gutter-width;
+
+    &::before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: -$grid-gutter-width * 0.75 - 1px;
+      width: 2px;
+      content: "";
+      background-color: var(--gray);
+    }
+    &:last-of-type::before {
+      bottom: 50%;
+    }
+
+    &.active {
+      .dates::before {
+        background-color: $dark;
+        border: 1px solid $light;
+      }
+
+      .dates::after {
+        background-color: $dark;
+        border-color: $dark;
+      }
+    }
+  }
+}
+
+.languages,
+.skills {
+  ul {
+    @include list-unstyled();
+  }
+}

@@ -3,9 +3,15 @@ import { NavLink } from "react-router-dom";
 import styles from "./index.module.scss";
 
 const SiteNavItem = (props: any) => {
-  let { classes = [], url, title } = props;
+  let {
+    classes = [],
+    url = "",
+    title = "",
+  }: { classes: any; url: string; title: string } = props;
   classes.push("item");
   classes = classes.filter(Boolean);
+
+  url = url.split("/").splice(3).filter(Boolean).join("/");
 
   return (
     <li
@@ -13,7 +19,7 @@ const SiteNavItem = (props: any) => {
         return styles[className];
       })}
     >
-      <NavLink to={`/${title.toLowerCase()}`}>{title}</NavLink>
+      <NavLink to={`/${url}`}>{title}</NavLink>
     </li>
   );
 };
