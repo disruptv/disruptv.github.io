@@ -2,44 +2,170 @@
 @import "../../../../src/assets/styles/variables";
 @import "~bootstrap/scss/mixins";
 
+$grid-gutter-width: 1.82rem;
+
 .document {
+  margin: 3rem 0;
   @include make-container;
-  @include make-container-max-widths();
 
   & > div {
     @include make-row();
   }
+
+  @media screen {
+    @include make-container-max-widths();
+
+    header {
+      display: flex;
+    }
+
+    h1 {
+      flex: 1 1 100%;
+    }
+  }
+
+  @media print {
+    & {
+      padding: 0 3rem;
+      margin: 0;
+    }
+
+    h1 {
+      text-align: center;
+    }
+  }
 }
 
 .contacts {
+  text-align: right;
   @include list-unstyled();
+
+  a {
+    color: inherit;
+  }
+
+  @media print {
+    text-align: center;
+    @include make-col(4);
+    @include row-cols(2);
+    @include make-row();
+    @include make-container();
+
+    a {
+      text-decoration: none;
+    }
+
+    article:nth-child(even) {
+      text-align: left;
+
+      &::before {
+        margin: 0 0.5em;
+        content: "•";
+      }
+    }
+
+    article:nth-child(odd) {
+      text-align: right;
+    }
+  }
+}
+
+.statement {
+  display: none;
+
+  @media print {
+    display: block;
+  }
 }
 
 .jobs {
   @include make-col-ready();
-  @include make-col(9);
+  @include make-col(12);
+
+  @include media-breakpoint-up(md) {
+    @include make-col(8);
+  }
+  @include media-breakpoint-up(lg) {
+    @include make-col(9);
+  }
+  @media print {
+    @include make-col(9);
+  }
 }
 
 .about {
   @include make-col-ready();
-  @include make-col-auto();
+  @include make-col(12);
+
+  @include media-breakpoint-up(md) {
+    @include make-col(4);
+  }
+  @include media-breakpoint-up(lg) {
+    @include make-col(3);
+  }
+  @media print {
+    @include make-col(3);
+  }
 }
 
 article.job,
 article.education {
   position: relative;
+  padding: $grid-gutter-width/2 0;
+
+  i {
+    flex: 1 1 100%;
+  }
 
   .company,
   .school {
-    display: inline;
+    margin: 0;
+    font-weight: bold;
+
+    &.company {
+      margin-inline-end: 0.25em;
+
+      @include media-breakpoint-up(md) {
+        white-space: nowrap;
+      }
+      @media print {
+        white-space: nowrap;
+      }
+    }
   }
+
   .location {
-    display: inline;
+    @include media-breakpoint-up(md) {
+      white-space: nowrap;
+    }
+    @media print {
+      white-space: nowrap;
+    }
   }
-  .roleTitle,
+
+  .roleTitle {
+    @include media-breakpoint-up(md) {
+      white-space: nowrap;
+    }
+    @media print {
+      white-space: nowrap;
+    }
+  }
+
   .degree {
-    display: inline;
+    @include media-breakpoint-up(md) {
+      white-space: nowrap;
+    }
+    @media print {
+      white-space: nowrap;
+    }
+
+    &::before {
+      margin: 0 0.5em;
+      content: "•";
+    }
   }
+
   .summary {
     display: inline;
   }
@@ -58,7 +184,7 @@ article.education {
       content: "";
       background-color: var(--gray);
       border-radius: 100%;
-      transform: translate(-($grid-gutter-width - 16px * 0.25/2), -50%);
+      transform: translate(-($grid-gutter-width - 1rem * 0.25/2), -50%);
     }
 
     &::after {
@@ -77,19 +203,33 @@ article.education {
   }
 
   &.job {
+    padding: $grid-gutter-width;
     margin-left: $grid-gutter-width;
 
     &::before {
       position: absolute;
       top: 0;
       bottom: 0;
-      left: -$grid-gutter-width * 0.75 - 1px;
+      left: -$grid-gutter-width * 0.75;
       width: 2px;
       content: "";
       background-color: var(--gray);
     }
+
     &:last-of-type::before {
       bottom: 50%;
+    }
+
+    & > div {
+      display: flex;
+      flex-wrap: wrap;
+
+      @include media-breakpoint-up(lg) {
+        flex-wrap: nowrap;
+      }
+      @media print {
+        flex-wrap: nowrap;
+      }
     }
 
     &.active {
@@ -110,5 +250,18 @@ article.education {
 .skills {
   ul {
     @include list-unstyled();
+  }
+}
+
+@media print {
+  @page {
+    margin: 0;
+    overflow: visible;
+    size: auto;
+  }
+
+  html {
+    overflow: initial;
+    font-size: 12px;
   }
 }

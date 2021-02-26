@@ -22,4 +22,8 @@
       transition: all 5s ease;
     }
   }
+
+  @media print {
+    visibility: collapse;
+  }
 }

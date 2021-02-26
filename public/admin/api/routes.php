@@ -1,6 +1,5 @@
 <?php
 require_once( dirname(__FILE__) . '/featured_media.php');
-// require_once( dirname(__FILE__) . '/custom_fields.php');
 
 require_once( dirname(__FILE__) . '/menus.php');
 

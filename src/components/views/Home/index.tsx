@@ -89,14 +89,14 @@ class Home extends React.Component<any, any> {
   render() {
     return (
       <main className={styles.container}>
-        <section className={styles.Section__intro}>
+        <section id='about' className={styles.Section__intro}>
           <h1>
             <small>Hey there,</small>
             {this.state.title}
           </h1>
           <div className={styles.intro}>{<this.composeIntro />}</div>
         </section>
-        <section className={styles.Section__showcase}>
+        <section id='projects' className={styles.Section__showcase}>
           {<this.composeProjects />}
         </section>
       </main>

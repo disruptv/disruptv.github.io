@@ -55,8 +55,12 @@ class CV {
       $key = 'disruptv_' . $key;
       $label = "<label for='$key'>$title</label><br />";
 
+      in_array($key, [
+        'disruptv_start_date', 'disruptv_end_date'
+      ]) ? $type = 'date' : $type = 'text';
+
       $field_classes = 'widefat';
-      $field = "<input class='$field_classes' type='text'";
+      $field = "<input class='$field_classes' type='$type'";
       $field .= "name='$key' id='$key'";
       $field .= "value='" . esc_attr( get_metadata( 'post', $post->ID, $key, true ) ) . "'";
       $field .= "/>";
@@ -79,7 +83,7 @@ class CV {
     foreach( $this->fields as $key => $value){
       $key = 'disruptv_' . $key;
 
-      /* Get the posted data and sanitize it for use as an HTML class. */
+      /* Get the posted data and sanitize it. */
       $input = ( isset( $_POST[$key] ) ? sanitize_text_field( $_POST[$key] ) : ’ );
 
       /* Get the meta value of the custom field key. */
