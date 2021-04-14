@@ -4,13 +4,14 @@
     <meta charset="utf-8" />
     <link
       rel="icon"
-      href="%PUBLIC_URL%/static/media/disruptv-brand--favicon.png"
+      href="%PUBLIC_URL%/static/media/disruptv-brand--favicon.svg"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#f8f9fa" />
+    <title>Digital Product Solutions | Aaron Salley @ Disruptv New York</title>
     <meta
       name="description"
-      content="Disruptv, New York | Digital Strategy, Design, Development, Content & Management"
+      content="I work with people and firms on thoughtful, innovative projects in UI/UX design, technical development & product management, to executive leadership capacities."
     />
     <link
       rel="apple-touch-icon"
@@ -34,20 +35,16 @@
     <script>
       (function (w, d, s, l, i) {
         w[l] = w[l] || [];
-        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
         var f = d.getElementsByTagName(s)[0],
           j = d.createElement(s),
-          dl = l != "dataLayer" ? "&l=" + l : "";
+          dl = l != 'dataLayer' ? '&l=' + l : '';
         j.async = true;
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
         f.parentNode.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", "%REACT_APP_GTM_ID%");
+      })(window, document, 'script', 'dataLayer', '%REACT_APP_GTM_ID%');
     </script>
     <!-- End Google Tag Manager -->
-    <title>
-      Aaron Salley | New York | Digital Strategy, Design, Development, Content &
-      Management
-    </title>
     <!-- Start Single Page Apps for GitHub Pages -->
     <script type="text/javascript">
       // Single Page Apps for GitHub Pages
@@ -61,14 +58,14 @@
       // the correct url will be waiting in the browser's history for
       // the single page app to route accordingly.
       (function (l) {
-        if (l.search[1] === "/") {
+        if (l.search[1] === '/') {
           var decoded = l.search
             .slice(1)
-            .split("&")
+            .split('&')
             .map(function (s) {
-              return s.replace(/~and~/g, "&");
+              return s.replace(/~and~/g, '&');
             })
-            .join("?");
+            .join('?');
           window.history.replaceState(
             null,
             null,

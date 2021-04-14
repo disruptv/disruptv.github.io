@@ -16,7 +16,7 @@ const $http = axios.create({
 /**
  * Load Global settings for reuse
  */
-export const GET_PROJECT_CAT = "GET_PROJECT_CAT";
+
 const getProjectCatId = (slug: string) => {
   return async (
     dispatch: Dispatch,
@@ -26,7 +26,7 @@ const getProjectCatId = (slug: string) => {
       const response = await $http.get(`/categories?slug=${slug}`);
 
       return dispatch({
-        type: GET_PROJECT_CAT,
+        type: "GET_PROJECT_CAT",
         payload: response.data[0].id,
       });
     } catch (error) {
@@ -34,7 +34,7 @@ const getProjectCatId = (slug: string) => {
     }
   };
 };
-export const GET_HOME_ID = "GET_HOME_ID";
+
 const getHomeId = (): ThunkAction => {
   return async (
     dispatch: Dispatch,
@@ -45,7 +45,7 @@ const getHomeId = (): ThunkAction => {
       const payload = 0; // response.data;
 
       return dispatch({
-        type: GET_HOME_ID,
+        type: "GET_HOME_ID",
         payload,
       });
     } catch (error) {
@@ -53,7 +53,7 @@ const getHomeId = (): ThunkAction => {
     }
   };
 }; // TODO: Get real ID from API
-export const GET_SETTINGS = "GET_SETTINGS";
+
 export const getSettings = async (dispatch: Dispatch<any>): Promise<any> => {
   try {
     await Promise.all([
@@ -62,7 +62,7 @@ export const getSettings = async (dispatch: Dispatch<any>): Promise<any> => {
     ]);
 
     return dispatch({
-      type: GET_SETTINGS,
+      type: "GET_SETTINGS",
     });
   } catch (error) {
     console.error(error);
@@ -72,7 +72,7 @@ export const getSettings = async (dispatch: Dispatch<any>): Promise<any> => {
 /**
  * Load all page data
  */
-export const GET_PAGES = "GET_PAGES";
+
 export const getPages = (): ThunkAction => {
   return async (
     dispatch: Dispatch,
@@ -83,7 +83,7 @@ export const getPages = (): ThunkAction => {
       const payload = response.data;
 
       return dispatch({
-        type: GET_PAGES,
+        type: "GET_PAGES",
         payload,
       });
     } catch (error) {
@@ -116,7 +116,7 @@ const getPosts = async (
     console.error(error.response.data);
   }
 };
-export const GET_PROJECTS = "GET_PROJECTS";
+
 export const getProjectPosts = (): ThunkAction => {
   return async (
     dispatch: Dispatch,
@@ -127,7 +127,7 @@ export const getProjectPosts = (): ThunkAction => {
       const projects = await getPosts(projectCatId);
 
       return dispatch({
-        type: GET_PROJECTS,
+        type: "GET_PROJECTS",
         payload: projects,
       });
     } catch (error) {
@@ -178,7 +178,7 @@ export const getTagsByID = async (
 /**
  * Load Site Nav & social media links
  */
-export const GET_SITENAV = "GET_SITENAV";
+
 export const getSiteNav = (): ThunkAction => {
   return async (
     dispatch: Dispatch,
@@ -191,7 +191,7 @@ export const getSiteNav = (): ThunkAction => {
         typeof payload === "string" ? getState().menus.SiteNav : payload;
 
       return dispatch({
-        type: GET_SITENAV,
+        type: "GET_SITENAV",
         payload,
       });
     } catch (error) {
@@ -199,7 +199,7 @@ export const getSiteNav = (): ThunkAction => {
     }
   };
 };
-export const GET_SOCIALMENU = "GET_SOCIALMENU";
+
 export const getSocialMenu = (): ThunkAction => {
   return async (
     dispatch: Dispatch,
@@ -212,7 +212,7 @@ export const getSocialMenu = (): ThunkAction => {
         typeof payload === "string" ? getState().menus.SocialMenu : payload;
 
       return dispatch({
-        type: GET_SOCIALMENU,
+        type: "GET_SOCIALMENU",
         payload,
       });
     } catch (error) {
@@ -224,7 +224,7 @@ export const getSocialMenu = (): ThunkAction => {
 /**
  * Notify when everything's ready
  */
-export const IS_INITIALIZED = "IS_INITIALIZED";
+
 export const initialize = async (
   dispatch: ThunkDispatch<any, unknown, Action<any>>
 ): Promise<any> => {
@@ -236,7 +236,7 @@ export const initialize = async (
     ]);
 
     return dispatch({
-      type: IS_INITIALIZED,
+      type: "IS_INITIALIZED",
     });
   } catch (error) {
     console.error(error);

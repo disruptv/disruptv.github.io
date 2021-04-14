@@ -1,9 +1,9 @@
-import React, { Dispatch } from "react";
-import { connect } from "react-redux";
-import { getPages, getProjectPosts } from "../../../store/actions";
-import htmlDecode from "../../../utils/htmlDecode";
-import ProjectSlate from "../../molecules/ProjectSlate";
-import styles from "./index.module.scss";
+import React, { Dispatch } from 'react';
+import { connect } from 'react-redux';
+import { getPages, getProjectPosts } from '../../../store/actions';
+import htmlDecode from '../../../utils/htmlDecode';
+import ProjectSlate from '../../molecules/ProjectSlate';
+import styles from './index.module.scss';
 
 const mapStateToProps = (state: any, ownProps: any) => {
   const { projects, pages, settings, ready } = state;
@@ -75,7 +75,7 @@ class Home extends React.Component<any, any> {
   };
 
   composeIntro = () => {
-    return this.state.excerpt.split("</br>").map((p: string, i: number) => {
+    return this.state.excerpt.split('</br>').map((p: string, i: number) => {
       return <p key={i}>{p}</p>;
     });
   };

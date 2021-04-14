@@ -1,7 +1,7 @@
+import { RootStateOrAny } from "react-redux";
 import { AnyAction } from "redux";
-import * as actions from "../actions";
 
-const initialState: any = {
+const initialState: RootStateOrAny = {
   pages: [],
   projects: [],
   menus: {
@@ -25,19 +25,19 @@ const initialState: any = {
   ready: false,
 };
 
-const reducer = (state = initialState, action: AnyAction): void => {
+const reducer = (state = initialState, action: AnyAction): RootStateOrAny => {
   switch (action.type) {
-    case actions.GET_PAGES:
+    case "GET_PAGES":
       return {
         ...state,
         pages: [...state.pages, ...action.payload],
       };
-    case actions.GET_PROJECTS:
+    case "GET_PROJECTS":
       return {
         ...state,
         projects: action.payload,
       };
-    case actions.GET_SITENAV:
+    case "GET_SITENAV":
       return {
         ...state,
         menus: {
@@ -45,7 +45,7 @@ const reducer = (state = initialState, action: AnyAction): void => {
           SiteNav: action.payload,
         },
       };
-    case actions.GET_SOCIALMENU:
+    case "GET_SOCIALMENU":
       return {
         ...state,
         menus: {
@@ -53,7 +53,7 @@ const reducer = (state = initialState, action: AnyAction): void => {
           SocialMenu: action.payload,
         },
       };
-    case actions.GET_HOME_ID:
+    case "GET_HOME_ID":
       return {
         ...state,
         settings: {
@@ -61,7 +61,7 @@ const reducer = (state = initialState, action: AnyAction): void => {
           homeId: action.payload,
         },
       };
-    case actions.GET_PROJECT_CAT:
+    case "GET_PROJECT_CAT":
       return {
         ...state,
         settings: {
@@ -69,11 +69,11 @@ const reducer = (state = initialState, action: AnyAction): void => {
           projectCatId: action.payload,
         },
       };
-    case actions.GET_SETTINGS:
+    case "GET_SETTINGS":
       return {
         ...state,
       };
-    case actions.IS_INITIALIZED:
+    case "IS_INITIALIZED":
       return {
         ...state,
         ready: true,
