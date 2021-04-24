@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/static/css/main.eb1e9c63.chunk.css",
+    "main.js": "/static/js/main.22ea49b3.chunk.js",
+    "main.js.map": "/static/js/main.22ea49b3.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.44dca298.js",
+    "runtime-main.js.map": "/static/js/runtime-main.44dca298.js.map",
+    "static/js/2.cb7d6ef8.chunk.js": "/static/js/2.cb7d6ef8.chunk.js",
+    "static/js/2.cb7d6ef8.chunk.js.map": "/static/js/2.cb7d6ef8.chunk.js.map",
+    "static/js/3.837dcb00.chunk.js": "/static/js/3.837dcb00.chunk.js",
+    "static/js/3.837dcb00.chunk.js.map": "/static/js/3.837dcb00.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.eb1e9c63.chunk.css.map": "/static/css/main.eb1e9c63.chunk.css.map",
+    "static/js/2.cb7d6ef8.chunk.js.LICENSE.txt": "/static/js/2.cb7d6ef8.chunk.js.LICENSE.txt",
+    "static/media/index.scss": "/static/media/disruptv-logo--onLight.cbc54ee2.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.44dca298.js",
+    "static/js/2.cb7d6ef8.chunk.js",
+    "static/css/main.eb1e9c63.chunk.css",
+    "static/js/main.22ea49b3.chunk.js"
+  ]
+}

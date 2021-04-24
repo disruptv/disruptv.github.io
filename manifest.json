@@ -1,0 +1,34 @@
+{
+  "short_name": "Disruptv",
+  "name": "Disruptv New York",
+  "icons": [
+    {
+      "src": "static/media/disruptv-icon--onLight192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "static/media/disruptv-icon--onLight512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/?source=pwa",
+  "display": "standalone",
+  "theme_color": "#f8f9fa",
+  "background_color": "#f8f9fa",
+  "shortcuts": [
+    {
+      "name": "Contact me",
+      "short_name": "Email",
+      "description": "Get in touch to work together",
+      "url": "/contact",
+      "icons": [
+        {
+          "src": "static/media/disruptv-icon--onLight192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}
